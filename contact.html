@@ -321,47 +321,51 @@
       <div class="form-section">
         <h2 class="title-sidebar">Je veux démarrer mon projet 🚀</h2>
 
-        <form method="post" id="contact-form">
-          <div class="input-group">
-              <label for="companyName">Nom de l'entreprise</label>
-              <input type="text" id="companyName" name="companyName" placeholder="Nom de l'entreprise">
-          </div>
+        <form action="https://formspree.io/f/xwprjjae" method="POST" id="contact-form">
+  <div class="input-group">
+      <label for="companyName">Nom de l'entreprise</label>
+      <input type="text" id="companyName" name="companyName" placeholder="Nom de l'entreprise">
+  </div>
 
-          <div class="input-group">
-              <label for="name">Nom</label>
-              <input type="text" id="name" name="name" placeholder="Nom complet">
-          </div>
+  <div class="input-group">
+      <label for="name">Nom</label>
+      <input type="text" id="name" name="name" placeholder="Nom complet">
+  </div>
 
-          <div class="input-group">
-              <label for="email">Email</label>
-              <input type="email" id="email" name="email" placeholder="Adresse email" required>
-          </div>
+  <div class="input-group">
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" placeholder="Adresse email" required>
+  </div>
 
-          <div class="input-group">
-              <label for="service">Service</label>
-              <select id="service" name="service" required>
-                  <option value="">-- Choisissez un service --</option>
-                  <option value="siteweb">Site Web</option>
-                  <option value="packaging">Packaging</option>
-                  <option value="reseaux">Réseaux Sociaux</option>
-                  <option value="autres">Autres</option>
-              </select>
-          </div>
+  <div class="input-group">
+      <label for="service">Service</label>
+      <select id="service" name="service" required>
+          <option value="">-- Choisissez un service --</option>
+          <option value="siteweb">Site Web</option>
+          <option value="packaging">Packaging</option>
+          <option value="reseaux">Réseaux Sociaux</option>
+          <option value="autres">Autres</option>
+      </select>
+  </div>
 
-          <div class="input-group" id="formule-group" style="display:none;">
-              <label for="formule">Formule</label>
-              <select id="formule" name="formule" disabled>
-                  <option value="">Veuillez d’abord choisir un service</option>
-              </select>
-          </div>
+  <div class="input-group" id="formule-group" style="display:none;">
+      <label for="formule">Formule</label>
+      <select id="formule" name="formule" disabled>
+          <option value="">Veuillez d’abord choisir un service</option>
+      </select>
+  </div>
 
-          <div class="input-group">
-              <label for="description">Description du projet</label>
-              <textarea id="description" name="description" placeholder="Décrivez brièvement votre projet..." required></textarea>
-          </div>
+  <div class="input-group">
+      <label for="description">Description du projet</label>
+      <textarea id="description" name="description" placeholder="Décrivez brièvement votre projet..." required></textarea>
+  </div>
 
-          <button type="submit" class="submit-btn">Envoyez ma requête ✉️</button>
-        </form>
+  <!-- Champ caché pour éviter le spam -->
+  <input type="text" name="_gotcha" style="display:none">
+
+  <button type="submit" class="submit-btn">Envoyez ma requête ✉️</button>
+</form>
+
       </div>
     </div>
   </section>
