@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>À propos de nous - agence_freelance</title>
+<style>
+/* ===== RESET ===== */
+* { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+body { background:#fef8f0; color:#111; overflow-x:hidden; position:relative; }
+
+/* ===== CANVAS POUR VAGUES ===== */
+#waveCanvas {
+  position: fixed;
+  top:0; left:0; width:100%; height:100%;
+  z-index:-2;
+}
+
+/* ===== FOND RADIAL ===== */
+body::before {
+  content:'';
+  position:fixed;
+  top:0; left:0;
+  width:100%; height:100%;
+  background: radial-gradient(circle at center, #fff8f0 0%, #fdf5e6 70%);
+  z-index:-1;
+  transition: background 2s ease;
+}
+
+/* ===== CURSEUR ===== */
+.cursor {
+  position: fixed; top:0; left:0;
+  width: 15px; height: 15px;
+  border: 2px solid #d6c9b3;
+  border-radius: 50%;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  transition: width 0.2s, height 0.2s, background 0.2s, border 0.2s;
+  z-index: 10000;
+}
+.cursor.active { width:30px; height:30px; background: rgba(214,201,179,0.2); }
+
+/* ===== HEADER ===== */
+header {
+  position: fixed; top:0; left:0; width:100%;
+  background: rgba(255,255,255,0.95); backdrop-filter: blur(10px);
+  display:flex; justify-content:space-between; align-items:center;
+  padding:15px 50px; z-index:1000; border-bottom:1px solid rgba(0,0,0,0.05);
+  transition: top 0.3s ease;
+}
+.logo { display:flex; align-items:center; gap:10px; }
+.logo img { height:50px; border-radius: 50px; }
+nav ul { display:flex; list-style:none; gap:25px; }
+nav li { position:relative; }
+nav li:hover > ul { display:block; }
+nav ul ul { display:none; position:absolute; top:100%; left:0; background:rgba(255,255,255,0.95);
+  backdrop-filter: blur(10px); padding:15px; border-radius:10px; min-width:220px;
+  box-shadow:0 8px 20px rgba(0,0,0,0.1); }
+nav ul ul li { display:block; margin:5px 0; }
+nav ul ul ul { top:0; left:100%; }
+.contact-btn { padding:10px 20px; background:#fff; border-radius:25px; border:1px solid #ccc;
+  transition: all 0.3s ease; }
+.contact-btn:hover { background:#f5e9d8; transform: translateY(-3px); box-shadow:0 8px 20px rgba(0,0,0,0.1); }
+
+/* ===== TITRES ===== */
+section { max-width:1200px; margin:120px auto; padding:0 20px; }
+h1,h2,h3 { margin-bottom:20px; color:#111; }
+h1 { font-size:2.2rem; text-align:center; }
+h2 { font-size:1.8rem; text-align:center; margin-top:60px; }
+h3 { font-size:1.3rem; }
+p { margin-bottom:20px; font-size:1.05rem; line-height:1.6; }
+
+/* ===== CARDS ===== */
+.cards-container { display:flex; flex-wrap:wrap; justify-content:center; gap:30px; margin-top:40px; }
+.card {
+  position: relative; background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(20px); border-radius:20px; width:300px; padding:30px 20px 20px 20px;
+  color:#111; text-align:center; box-shadow:0 8px 20px rgba(0,0,0,0.1);
+  transition: transform 0.5s, box-shadow 0.5s, filter 0.5s;
+}
+.card:hover {
+  transform: translateY(-15px) rotateX(5deg) scale(1.03);
+  box-shadow: 0 20px 35px rgba(0,0,0,0.25);
+  filter: brightness(1.05);
+}
+.card-title { font-size:1.3rem; font-weight:bold; margin-bottom:10px; position:relative; }
+.card-title img { position:absolute; top:-10px; right:-10px; width:50px; height:50px; border-radius:50%; object-fit:cover; border:2px solid #fff; }
+.card-subtitle { font-size:1rem; font-weight:500; margin-bottom:15px; color:#333; }
+.card-text { font-size:0.95rem; line-height:1.5; }
+
+/* ===== BOX INTERACTIVE ===== */
+.interactive-box { max-width:900px; margin:50px auto; padding:30px; background: rgba(255,255,255,0.2);
+  backdrop-filter: blur(15px); border-radius:20px; text-align:left; overflow:hidden; transition: transform 0.3s; }
+.interactive-box:hover { transform: scale(1.02); box-shadow:0 15px 30px rgba(0,0,0,0.15); }
+
+/* ===== FOOTER ===== */
+footer { margin-top:60px; padding:30px 20px; text-align:center; background:#f5f1eb; border-top:1px solid #ddd; font-size:0.9rem; }
+</style>
+</head>
+<body>
+
+<!-- CURSEUR -->
+<div class="cursor" id="cursor"></div>
+
+<!-- CANVAS VAGUES -->
+<canvas id="waveCanvas"></canvas>
+
+<!-- HEADER -->
+<header id="header">
+  <div class="logo">
+    <img src="logo.png" alt="logo agence_freelance">
+    <span>Agence_Freelance</span>
+  </div>
+  <nav>
+    <ul>
+      <li><a href="index.html">Accueil</a></li>
+      <li>
+        <a>Nos services</a>
+        <ul>
+          <li>
+            <a>Nos sites web</a>
+            <ul>
+              <li><a href="offre-principal.html">Site principal</a></li>
+              <li><a href="offre-secondaire.html">Site secondaire</a></li>
+              <li><a href="offre-pro.html">Site professionnel</a></li>
+            </ul>
+          </li>
+          <li>
+            <a>Nos packagings</a>
+            <ul>
+              <li><a href="starter-pack.html">Starter pack</a></li>
+              <li><a href="package-business.html">Business pack</a></li>
+              <li><a href="package-pro.html">Pro pack</a></li>
+            </ul>
+          </li>
+          <li><a href="reseaux-sociaux.html">Réseaux sociaux</a></li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+  <a class="contact-btn">Nous contacter</a>
+</header>
+
+<!-- À PROPOS -->
+<section>
+  <h1>À propos de nous</h1>
+  <div class="intro-box">
+    <p>
+      Agence_Freelance est une agence de freelances passionnés qui travaille en équipe pour créer le site web de vos rêves, répondre à vos attentes, et vous aider à vous développer en ligne.
+      Nos freelances sont choisis avec soin pour leur expertise et leur fiabilité. Grâce à une coordination attentive, nous assurons un suivi régulier de chaque mission afin que votre projet progresse efficacement.
+      Nous combinons design, développement, marketing digital et packaging pour fournir des solutions sur-mesure et cohérentes.
+    </p>
+  </div>
+</section>
+
+<style>
+.intro-box {
+  position: relative;
+  margin: 30px auto 0 auto;
+  max-width: 900px;
+  padding: 30px;
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(20px);
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  animation: fadeInUp 1s ease forwards;
+}
+.intro-box p {
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color:#111;
+}
+
+/* Border animé au hover */
+.intro-box::before {
+  content: '';
+  position: absolute;
+  top:-2px; left:-2px; right:-2px; bottom:-2px;
+  border-radius: 22px;
+  border: 2px solid transparent;
+  background: linear-gradient(120deg, #fdf5e6, #fef8f0, #f5e9d8, #fff8f0);
+  background-size: 300% 300%;
+  z-index: -1;
+  transition: all 0.5s ease;
+  animation: rotateBorder 8s linear infinite;
+}
+
+.intro-box:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 20px 35px rgba(0,0,0,0.2);
+}
+
+@keyframes fadeInUp {
+  0% { opacity:0; transform: translateY(20px);}
+  100% { opacity:1; transform: translateY(0);}
+}
+
+@keyframes rotateBorder {
+  0% { background-position:0% 50%; }
+  50% { background-position:100% 50%; }
+  100% { background-position:0% 50%; }
+}
+</style>
+
+
+<h2>Notre équipe</h2>
+<section class="cards-container">
+  <div class="card">
+    <div class="card-title">Antoine L <img src="headshot1.jpg" alt="Antoine L"></div>
+    <div class="card-subtitle">Consultant</div>
+    <div class="card-text">C'est lui qui vous suivra tout au long du projet. Il coordonne design et développement pour garantir un suivi fluide et un site web conforme à votre vision.
+</div>
+  </div>
+  <div class="card">
+    <div class="card-title">Marie D <img src="headshot2.jpg" alt="Marie D"></div>
+    <div class="card-subtitle">Designer</div>
+    <div class="card-text">Spécialisé dans la création, à la main, des conceptions uniques et professionnelles. Grâce à des outils avancés, elle imagine logos, maquettes et identités visuelles sur mesure.</div>
+  </div>
+  <div class="card">
+    <div class="card-title">Lucas P <img src="headshot3.jpg" alt="Lucas P"></div>
+    <div class="card-subtitle">Developpeur</div>
+    <div class="card-text">développeur front-end et back-end, donne vie à chaque projet web grâce à une maîtrise experte du HTML, CSS et JavaScript, garantissant performance, fluidité et précision dans chaque ligne de code.</div>
+  </div>
+</section>
+
+<h2>Pourquoi nous choisir ?</h2>
+<section class="interactive-box">
+  <h3>Qu'est-ce qu'un freelance ?</h3>
+  <p>
+    Un freelance est un professionnel indépendant, choisi avec soin pour ses compétences spécifiques. Chez agence_freelance, nous travaillons avec des freelances de confiance et expérimentés. Chaque mission est coordonnée par nos consultants, qui assure le suivi et la cohérence du travail réalisé, avec des retours réguliers au client.
+  </p>
+</section>
+
+<footer>
+  &copy; 2025 agence_freelance. Tous droits réservés.
+</footer>
+
+<script>
+// NAVIGATION SCROLL HIDE/SHOW
+let lastScrollTop = 0;
+const header = document.getElementById('header');
+window.addEventListener('scroll', function() {
+  let st = window.pageYOffset || document.documentElement.scrollTop;
+  header.style.top = (st > lastScrollTop) ? '-100px' : '0';
+  lastScrollTop = st <= 0 ? 0 : st;
+});
+
+// CARDS 3D ANIMATION
+const cards = document.querySelectorAll('.card');
+cards.forEach(card => {
+  card.addEventListener('mousemove', e => {
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    card.style.transform = `rotateY(${(x - rect.width/2)/10}deg) rotateX(${-(y - rect.height/2)/10}deg) scale(1.03)`;
+  });
+  card.addEventListener('mouseleave', () => { card.style.transform = 'rotateY(0deg) rotateX(0deg)'; });
+});
+
+// CURSEUR PERSONNALISÉ
+const cursor = document.getElementById('cursor');
+document.addEventListener('mousemove', e => { cursor.style.top = e.clientY + 'px'; cursor.style.left = e.clientX + 'px'; });
+const clickableElements = document.querySelectorAll('a, button, .card');
+clickableElements.forEach(el => {
+  el.addEventListener('mouseenter', () => cursor.classList.add('active'));
+  el.addEventListener('mouseleave', () => cursor.classList.remove('active'));
+});
+
+// ===== VAGUES CANVAS =====
+const canvas = document.getElementById('waveCanvas');
+const ctx = canvas.getContext('2d');
+let W = canvas.width = window.innerWidth;
+let H = canvas.height = window.innerHeight;
+
+window.addEventListener('resize', () => { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; });
+
+const waves = [];
+for(let i=0;i<5;i++){
+  waves.push({y:H/2+i*50, amplitude:30+i*5, wavelength:0.02+i*0.01, speed:0.02+i*0.005, phase:0, color:`rgba(245, 238, 224,0.2)`});
+}
+
+let mouseX = 0, mouseY=0;
+document.addEventListener('mousemove', e => { mouseX=e.clientX; mouseY=e.clientY; });
+
+function drawWaves(){
+  ctx.clearRect(0,0,W,H);
+  waves.forEach(w=>{
+    ctx.beginPath();
+    for(let x=0;x<W;x++){
+      const y = w.y + Math.sin(x*w.wavelength + w.phase + mouseX*0.001)*w.amplitude;
+      ctx.lineTo(x,y);
+    }
+    ctx.strokeStyle = w.color;
+    ctx.lineWidth=2;
+    ctx.stroke();
+    w.phase += w.speed;
+  });
+  requestAnimationFrame(drawWaves);
+}
+drawWaves();
+</script>
+</body>
+</html>
+

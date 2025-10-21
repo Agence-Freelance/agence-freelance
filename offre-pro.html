@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Offre Professionelle</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* =========================
+       VARIABLES / RESET
+    ========================= */
+    :root{
+      --bg: #fbfaf8;
+      --card: #ffffff;
+      --text: #111316;
+      --muted: #6b6b6b;
+      --gold-1: #b89146; /* principal */
+      --gold-2: #c7a85f; /* clair */
+      --accent: #0f4f4c;
+      --shadow: rgba(11,11,11,0.08);
+      --radius: 18px;
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{
+      font-family:"Poppins",sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.6;
+      -webkit-text-size-adjust:100%;
+    }
+
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block;height:auto}
+
+    /* =========================
+       HEADER / NAV (sticky)
+    ========================= */
+    header{position:relative;z-index:100}
+    .sticky{
+      position:fixed;
+      inset:0 auto auto 0;
+      top:0;
+      left:0;
+      width:100%;
+      height:78px;
+      background:linear-gradient(180deg, rgba(255,255,255,0.96), rgba(255,255,255,0.95));
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:0 5%;
+      box-shadow:0 6px 22px var(--shadow);
+      transition:transform .35s ease, background .25s ease;
+      backdrop-filter: blur(6px);
+    }
+
+    /* logo */
+    .logo{height:56px;border-radius:50%;cursor:pointer;transition:transform .25s}
+    .logo:hover{transform:scale(1.05)}
+
+    .accueil-container .accueil-btn{
+      display:inline-block;
+      padding:10px 14px;
+      border-radius:12px;
+      background:transparent;
+      color:var(--accent);
+      font-weight:600;
+      border:2px solid transparent;
+      transition:all .2s;
+    }
+    .accueil-container .accueil-btn:hover{
+      background: linear-gradient(90deg, rgba(200,168,90,0.12), rgba(184,145,70,0.08));
+      transform:translateY(-2px);
+      border-color: rgba(184,145,70,0.18);
+    }
+
+    /* nav links */
+    .barre-nav{
+      list-style:none;
+      display:flex;
+      gap:36px;
+      align-items:center;
+      font-weight:500;
+    }
+    .nav-item, .nav-item-1{
+      position:relative;
+      color:var(--text);
+      cursor:pointer;
+      font-size:0.95rem;
+      transition:color .2s;
+    }
+    .nav-item:hover, .nav-item-1:hover{color:var(--gold-1)}
+
+    .container-sub-menu{
+      display:none;
+      position:absolute;
+      left:0;
+      top:44px;
+      background:#fff;
+      border-radius:10px;
+      padding:10px 12px;
+      box-shadow:0 10px 28px rgba(0,0,0,0.08);
+      min-width:190px;
+      z-index:20;
+    }
+    .nav-item:hover .container-sub-menu{display:block}
+    .text-barre{display:block;padding:6px 2px;color:var(--muted);font-size:0.92rem}
+    .text-barre:hover{color:var(--gold-1)}
+
+    /* sticky small screen - burger */
+    .burger{display:none;flex-direction:column;gap:6px;cursor:pointer}
+    .burger div{width:28px;height:3px;background:#1f1f1f;border-radius:4px;transition:all .25s}
+
+    /* =========================
+       HERO / TITRE
+    ========================= */
+    .container{
+      text-align:center;
+      margin-top:120px;
+      font-size:2.2rem;
+      font-weight:700;
+      color:var(--gold-1);
+      letter-spacing:0.6px;
+      font-family:"Playfair Display",serif;
+    }
+    .mot-complement{
+      text-align:center;color:var(--muted);font-size:1.02rem;margin-top:8px;
+    }
+
+    /* hero image */
+    #img_offre_3, .img-presentation-offre-princ{
+      width:100%;
+      height:460px;
+      object-fit:cover;
+      border-radius:0 0 22px 22px;
+      margin-top:26px;
+      box-shadow:0 18px 40px rgba(15,15,15,0.06);
+    }
+
+    /* seconde logo (décoratif) */
+    .logo-offre-principal{
+      height:80px;border-radius:80px;position:relative;left:70%;top:-48px;
+    }
+
+    /* =========================
+       AUTRE OFFRE / LIENS
+    ========================= */
+    .autre-offre{
+      margin:18px 5%;
+      display:flex;
+      align-items:center;gap:18px;flex-wrap:wrap;
+    }
+    .titre-autre-offre{font-size:1.15rem;color:var(--accent);margin-left:6px}
+    .barre-esthetique-titre-autre-offre{
+      height:4px;width:220px;background:linear-gradient(90deg,var(--gold-2),var(--gold-1));border-radius:999px; margin-top:-6px;margin-left:6px;
+    }
+
+    .offre-content{
+      display:inline-block;
+      color:var(--text);
+      text-decoration:none;
+      padding:10px 18px;border-radius:999px;
+      background:transparent;border:1px solid rgba(15,79,76,0.06);
+      box-shadow:0 6px 18px rgba(15,79,76,0.02);
+      transition:all .25s;
+      font-weight:600;margin-left:6px;
+    }
+    .offre-content:hover{
+      transform:translateY(-4px);
+      background: linear-gradient(90deg, rgba(200,168,90,0.08), rgba(184,145,70,0.05));
+      border-color: rgba(184,145,70,0.18);
+    }
+
+    /* =========================
+       BOX 'MAIS QUI SOMMES-NOUS'
+    ========================= */
+    .box-qui-sommes-nous-offre-secondaire,
+    .box-qui-sommes-nous{
+      background:var(--card);
+      max-width:980px;
+      margin:40px auto;
+      padding:36px;
+      border-radius:var(--radius);
+      box-shadow:0 14px 40px rgba(20,20,20,0.06);
+      text-align:left;
+      transition:transform .25s ease, box-shadow .25s;
+    }
+    .box-qui-sommes-nous-offre-secondaire:hover,
+    .box-qui-sommes-nous:hover{transform:translateY(-6px);box-shadow:0 20px 50px rgba(20,20,20,0.08)}
+
+    .title-precision{color:var(--gold-1);font-size:1.9rem;margin-bottom:12px;font-family:"Playfair Display",serif}
+    .txt-description{font-size:1rem;color:var(--muted);line-height:1.7}
+    .txt-description a{color:var(--gold-1);text-decoration:underline}
+
+    /* =========================
+       PRICING / OFFRE CARD (garde le contenu exact)
+    ========================= */
+    .pricing{display:flex;justify-content:center;padding:30px 5%;margin:10px auto}
+    .card.professional-offer{
+      width:720px;
+      background:linear-gradient(180deg,#fff,#fff);
+      border-radius:16px;
+      padding:28px 30px;
+      box-shadow:0 18px 48px rgba(11,11,11,0.06);
+      border:1px solid rgba(184,145,70,0.08);
+    }
+    .card.professional-offer h2{color:var(--gold-1);font-family:"Playfair Display",serif;font-size:1.6rem;margin-bottom:6px}
+    .card.professional-offer .subtitle{color:var(--muted);margin-bottom:14px;font-weight:500}
+    .card.professional-offer .features{list-style:none;padding-left:0;margin:14px 0 18px}
+    .card.professional-offer .features li{
+      padding:8px 0;
+      border-bottom:1px dashed rgba(15,79,76,0.04);
+      font-size:0.98rem;color:var(--text);
+      display:flex;align-items:flex-start;gap:10px;
+    }
+    .card.professional-offer .features li:before{
+      content:"";
+      width:8px;height:8px;border-radius:2px;margin-top:8px;
+      background:linear-gradient(180deg,var(--gold-1),var(--gold-2));
+      box-shadow:0 2px 6px rgba(184,145,70,0.18);
+      flex:0 0 10px;
+    }
+
+    .card.professional-offer .price{margin-top:18px;font-size:1.05rem;color:var(--muted)}
+    .card.professional-offer .price span{color:var(--gold-1);font-weight:700;font-size:1.18rem;margin-left:6px}
+
+    .card.professional-offer .cta{
+      margin-top:18px;
+      background:linear-gradient(90deg,var(--gold-2),var(--gold-1));
+      color:#fff;border:none;padding:12px 18px;border-radius:12px;cursor:pointer;font-weight:700;
+      box-shadow:0 8px 28px rgba(184,145,70,0.18);
+      transition:transform .18s ease,box-shadow .18s;
+    }
+    .card.professional-offer .cta:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(184,145,70,0.22)}
+
+    /* =========================
+       PROGRESS (copié / adapté couleur dorée)
+    ========================= */
+    /* container */
+    .progress{padding:28px 8px 80px}
+    .progress_inner{position:relative;margin:40px auto;height:220px;max-width:960px}
+    .progress_inner__step{width:20%;font-size:14px;padding:0 10px;float:left;text-align:center;position:relative}
+    .progress_inner__step label{padding-top:50px;top:-20px;display:block;position:relative;cursor:pointer;font-weight:600;color:var(--muted)}
+    .progress_inner__step:before{
+      position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);margin:auto;
+      width:34px;height:34px;color:var(--gold-1);background:#fff;line-height:34px;border:3px solid rgba(184,145,70,0.18);
+      font-size:13px;border-radius:100%;transition:all .4s;pointer-events:none;top:6px;
+      box-shadow:0 6px 18px rgba(184,145,70,0.06)
+    }
+    .progress_inner__step:nth-of-type(1):before{content:'1'}
+    .progress_inner__step:nth-of-type(2):before{content:'2'}
+    .progress_inner__step:nth-of-type(3):before{content:'3'}
+    .progress_inner__step:nth-of-type(4):before{content:'4'}
+    .progress_inner__step:nth-of-type(5):before{content:'5'}
+
+    .progress_inner__bar,
+    .progress_inner__bar--set{height:6px;left:10%;border-radius:6px;position:relative;z-index:-1}
+    .progress_inner__bar{
+      background:repeating-linear-gradient(45deg,var(--gold-1),var(--gold-1) 4px,var(--gold-2) 4px,var(--gold-2) 10px);
+      width:0;transition:width 800ms cubic-bezier(.915,.015,.3,1.005)
+    }
+    .progress_inner__bar--set{width:80%;top:-6px;background:#e9d9b1;z-index:-2}
+
+    .progress_inner__tabs .tab{
+      opacity:0;position:absolute;left:40px;top:40px;text-align:left;margin-top:80px;padding:24px;background:rgba(255,255,255,0.7);border-radius:10px;box-shadow:0 8px 24px rgba(0,0,0,0.06)
+    }
+    .progress_inner__tabs .tab h1{margin:0;color:var(--accent)}
+    .progress_inner__tabs .tab p{font-weight:400;opacity:0.9;margin-top:12px;padding-left:6px;color:var(--muted);line-height:1.6}
+
+    /* status box (boîte décor) */
+    .progress_inner__status{width:48px;height:48px;top:-94px;transition:right 800ms cubic-bezier(.915,.015,.3,1.005);transform:translateX(50%);position:absolute}
+    .progress_inner__status .box_base{background:linear-gradient(135deg,#c7a85f,#b89146);width:44px;height:46px;border-radius:4px;opacity:0;position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);margin:auto}
+    .progress_inner__status .box_lid{width:48px;height:14px;background:#b89146;border-radius:3px;position:absolute;top:-6px;opacity:0}
+    .progress_inner__status .box_item{width:18px;height:18px;background:#e8d9b7;border-radius:4px;transform:rotate(45deg);position:absolute;left:0;right:0;top:50%;transform:translateY(-50%) rotate(45deg);margin:auto;opacity:0}
+    .progress_inner__status .box_ribbon{width:10px;height:46px;background:#7b3b00;position:absolute;left:50%;transform:translateX(-50%);top:0;opacity:0}
+    .progress_inner__status .box_bow__left,.progress_inner__status .box_bow__right{width:8px;height:12px;background:#7b3b00;position:absolute;opacity:0}
+
+    /* hide radio */
+    .progress_inner input[type="radio"]{display:none}
+
+    /* set states (same logic as ton css original) */
+    #step-1:checked ~ .progress_inner__status{transform:translateX(0)}
+    #step-1:checked ~ .progress_inner__status .box_base{opacity:1}
+    #step-2:checked ~ .progress_inner__status{transform:translateX(200px)}
+    #step-2:checked ~ .progress_inner__status .box_base{opacity:1}
+    #step-2:checked ~ .progress_inner__status .box_item{opacity:1;top:-10px}
+    #step-3:checked ~ .progress_inner__status{transform:translateX(360px)}
+    #step-3:checked ~ .progress_inner__status .box_base{opacity:1}
+    #step-3:checked ~ .progress_inner__status .box_item{opacity:1;top:10px}
+    #step-3:checked ~ .progress_inner__status .box_lid{opacity:1;top:-1px}
+    #step-4:checked ~ .progress_inner__status{transform:translateX(520px)}
+    #step-4:checked ~ .progress_inner__status .box_base{opacity:1}
+    #step-4:checked ~ .progress_inner__status .box_ribbon{opacity:1;top:50%}
+    #step-4:checked ~ .progress_inner__status .box_bow__left,
+    #step-4:checked ~ .progress_inner__status .box_bow__right{opacity:1;top:-8px}
+    #step-5:checked ~ .progress_inner__status{transform:translateX(660px)}
+    #step-5:checked ~ .progress_inner__status .box_tag,
+    #step-5:checked ~ .progress_inner__status .box_string{opacity:1;top:10px;left:20px}
+
+    /* tabs visibility */
+    #step-1:checked ~ .progress_inner__tabs .tab:nth-of-type(1),
+    #step-2:checked ~ .progress_inner__tabs .tab:nth-of-type(2),
+    #step-3:checked ~ .progress_inner__tabs .tab:nth-of-type(3),
+    #step-4:checked ~ .progress_inner__tabs .tab:nth-of-type(4),
+    #step-5:checked ~ .progress_inner__tabs .tab:nth-of-type(5){
+      opacity:1;top:0;transform:none
+    }
+
+    /* =========================
+       FOOTER
+    ========================= */
+    footer{
+      background:#0f1724;color:#fff;padding:70px 5% 40px;margin-top:40px;border-top:4px solid rgba(184,145,70,0.06)
+    }
+    .footer-container{display:flex;flex-wrap:wrap;justify-content:space-between;gap:30px}
+    .footer-section h3{margin-bottom:12px;color:#f6d89b}
+    .footer-section a{color:#fff;text-decoration:none;transition:color .2s}
+    .footer-section a:hover{color:#f6d89b}
+    .footer-bottom{text-align:center;margin-top:30px;font-size:0.95rem;color:#bfbfbf}
+
+    /* =========================
+       RESPONSIVE
+    ========================= */
+    @media screen and (max-width:992px){
+      .barre-nav{display:none}
+      .burger{display:flex}
+      .sticky{padding:0 4%}
+      .container{margin-top:98px}
+      .card.professional-offer{width:100%}
+      .box-qui-sommes-nous-offre-secondaire{padding:22px;margin:20px}
+      .progress_inner{max-width:100%;overflow:hidden}
+      .progress_inner__status{position:absolute;left:8%}
+    }
+
+    @media screen and (max-width:640px){
+      .container{font-size:1.6rem}
+      .mot-complement{font-size:0.98rem}
+      #img_offre_3{height:300px}
+      .card.professional-offer{padding:18px}
+      .progress_inner__step label{font-size:12px}
+      .progress_inner__step:before{width:28px;height:28px;line-height:28px}
+    }
+
+  </style>
+</head>
+
+<body class="body-offre-princ">
+  <header>
+    <div class="sticky">
+      <div class="accueil-container">
+        <a href="index.html" class="accueil-btn">Accueil</a>
+      </div>
+
+      <img src="logo.png" alt="logo" class="logo">
+
+      <ul class="barre-nav">
+        <li class="nav-item">Nos compétences
+          <div>
+            <div class="l3"></div>
+          </div>
+          <div class="container-sub-menu">
+            <a class="text-barre" href="">- About us</a><br>
+            <a class="text-barre" href="">- Nos réalisations</a>
+          </div>
+        </li>
+
+        <div class="bulle-container">
+          <span class="nav-item-1" onclick="closeSidebar()">Nous contacter</span>
+        </div>
+      </ul>
+    </div>
+
+    <div class="container">NOTRE OFFRE PROFESSIONELLE</div>
+    <p class="mot-complement">Par agence_freelance</p>
+  </header>
+
+  <img id="img_offre_3" src="img-offre-pro.jpg" alt="Présentation offre pro">
+
+  <img src="logo.png" class="logo">
+
+  <div class="autre-offre">
+    <div class="barre1-offre-secondaire"></div>
+    <div class="barre2-offre-secondaire"></div>
+    <h2 class="titre-autre-offre">Nos autre offres :</h2><br>
+      <a class = "offre-content" href="offre-principal.html">Offre Principal</a>
+      <a class = "offre-content" href="offre-pro.html">Offre Professionelle</a>
+  </div>
+
+  <div class="box-qui-sommes-nous-offre-secondaire">
+    <h1 class="title-precision">Mais qui sommes-nous ?</h1>
+    <p class="txt-description">Nous sommes une micro-entreprise passioné par le développement web. Nous avons pour but d'être le plus 
+        proche de nos clients afin d'être a l'écoute de leur exigences et proposer le site internet dont ils rêvent.
+        <br>Cela passe tout d'abord par une relation étroite entre le client et le vendeur.
+        Pour en savoir plus sur nous cliquez <a href="">ici</a> 
+    </p>
+  </div>
+
+  <!-- Offre Secondaire -->
+  <section class="pricing">
+    <div class="card professional-offer">
+      <h2>Offre Professionnelle</h2>
+      <p class="subtitle">Solution complète pour entreprises</p>
+      <ul class="features">
+        <li>⭐️ Site multi-pages : jusqu’à 5 pages incluses (Accueil, À propos, Services, Blog, Contact) avec possibilité d’ajouter des pages supplémentaires</li>
+        <li>⭐️ Design responsive : optimisé pour ordinateurs, tablettes et smartphones</li>
+        <li>⭐️ Formulaire de contact intégré</li>
+        <li>⭐️ Inscription à la newsletter</li>
+        <li>⭐️ Portfolio / galerie : présentation illimitée de photos, projets ou réalisations</li>
+        <li>⭐️ Liens externes illimités : réseaux sociaux, partenaires, autres sites</li>
+        <li>⭐️ Footer complet inclus : mentions légales, informations de contact, liens pratiques</li>
+        <li>⭐️ Nom de domaine inclus : acquisition et configuration selon le projet</li>
+        <li>⭐️ SEO de base : optimisation titres, mots-clés, balises et descriptions</li>
+        <li>⭐️ Chargement rapide et optimisation technique</li>
+        <li>⭐️ Mise en place rapide et efficace : site prêt à l’usage, fonctionnel et professionnel</li>
+      </ul>
+      <div class="price">À partir de <span>XXX €</span></div>
+      <button class="cta">Demander un devis</button>
+    </div>
+  </section>
+
+  <!-- EXPLICATIONS PROCESSUS :  -->
+  <h2 class="title-processus" style="text-align:center;color:var(--accent);margin-top:22px;font-family:Playfair Display, serif">Qu'est ce qu'il se passe après ma demande ?</h2>
+  <div class="barre-esthetique" style="height:4px;width:120px;background:linear-gradient(90deg,var(--gold-2),var(--gold-1));margin:8px auto 0;border-radius:999px"></div>
+  <img class="logo-offre-principal" src="logo.png" alt="logo">
+
+  <div class="progress">
+    <div class="progress_inner">
+
+      <!-- Étapes -->
+      <div class="progress_inner__step">
+        <label for="step-1">Start order</label>
+      </div>
+      <div class="progress_inner__step">
+        <label for="step-2">Prepare gift</label>
+      </div>
+      <div class="progress_inner__step">
+        <label for="step-3">Pack gift</label>
+      </div>
+      <div class="progress_inner__step">
+        <label for="step-4">Decorate box</label>
+      </div>
+      <div class="progress_inner__step">
+        <label for="step-5">Send gift</label>
+      </div>
+
+      <!-- Inputs radio -->
+      <input type="radio" name="step" id="step-1" checked="checked">
+      <input type="radio" name="step" id="step-2">
+      <input type="radio" name="step" id="step-3">
+      <input type="radio" name="step" id="step-4">
+      <input type="radio" name="step" id="step-5">
+
+      <!-- Barres de progression -->
+      <div class="progress_inner__bar"></div>
+      <div class="progress_inner__bar--set"></div>
+
+      <!-- Contenu des tabs -->
+      <div class="progress_inner__tabs">
+        <div class="tab tab-0">
+          <h1>Première prise de contact et découverte</h1>
+          <p>1- Vous nous contactez via formulaire, email ou téléphone.<br>
+          2- nous analysons votre besoin et nous vous renvoyons un devis structuré<br>
+          3- Validation du devis ou demande de révision par vous même<br>
+          4- Premier appel pour définir en détail votre projet </p>
+        </div>
+        <div class="tab tab-1">
+          <h1>Conception de la maquette (wireframes)</h1>
+          <p>1- Suite à l'appel convenu, votre consultant vous prépare une maquette visuelle du site.<br>
+              2- Puis nous vous retournons les maquettes pour les ajuster à vos goûts, autant de fois qu'il le faut.<br>
+          </p>
+        </div>
+        <div class="tab tab-2">
+          <h1>Validation du design et acompte</h1>
+          <p>1- Le client effectue un premier acompte de 40% du montant total.<br>
+          2- En même temps, envoie des maquettes finalisées<br>
+      3- Validation du design final avec le client pour que le site corresponde exactement à ses attentes.</p>
+        </div>
+        <div class="tab tab-3">
+          <h1>Développement du site</h1>
+          <p>1- Les développeurs web prennent en charge le projet.<br>
+          2- Intégration des contenus, fonctionnalités et styles validés.<br>
+      3- Suivi régulier avec le consultant pour garantir que le site respecte le design validé.</p>
+        </div>
+        <div class="tab tab-4">
+          <h1>Livraison et maintenance</h1>
+          <p>1- Livraison du site finalisé au client et la somme restante doit être payé.<br>
+          2- Ajustements finaux si nécessaire (modifications mineures ou corrections).<br>
+      3- Si inclus dans le package, mise en place d’un support et maintenance continue : mises à jour, sécurité, sauvegardes.<br>
+  4- Suivi post-livraison de 1 semaine + formation rapide (2h environ) sur demande du client.</p>
+        </div>
+      </div>
+
+      <!-- Status avec boîte cadeau -->
+      <div class="progress_inner__status">
+        <div class="box_base"></div>
+        <div class="box_lid"></div>
+        <div class="box_ribbon"></div>
+        <div class="box_bow">
+          <div class="box_bow__left"></div>
+          <div class="box_bow__right"></div>
+        </div>
+        <div class="box_item"></div>
+        <div class="box_tag"></div>
+        <div class="box_string"></div>
+      </div>
+
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-container">
+      <div class="footer-section">
+        <h3>À propos</h3>
+        <p>Découvrez notre mission et notre engagement à fournir des services de qualité.</p>
+      </div>
+      <div class="footer-section">
+        <h3>Contact</h3>
+        <p>Email: agence_freelance@yahoo.com</p>
+        <p>Téléphone: +33 1 23 45 67 89</p>
+      </div>
+      <div class="footer-section">
+        <h3>Suivez-nous</h3>
+        <a href="#">Facebook</a> | 
+        <a href="#">Instagram</a> | 
+        <a href="#">LinkedIn</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2024 Exemple. <a href="conditions_utilisations.html">Tous droits réservés.</a></p>
+    </div>
+
+    <div itemscope itemtype='http://schema.org/Person' class='fiverr-seller-widget' style='display: inline-block;'>
+      <a itemprop='url' href=https://www.fiverr.com/antoine_gabriel rel="nofollow" target="_blank" style='display: inline-block;'>
+        <div class='fiverr-seller-content' id='fiverr-seller-widget-content-8cc4f058-45c5-4968-bc6d-2c622e08a43a' itemprop='contentURL' style='display: none;'></div>
+        <div id='fiverr-widget-seller-data' style='display: none;'>
+          <div itemprop='name' >antoine_gabriel</div>
+          <div itemscope itemtype='http://schema.org/Organization'><span itemprop='name'>Fiverr</span></div>
+          <div itemprop='jobtitle'>Seller</div>
+          <div itemprop='description'>Bonjour, je suis étudiant dans dans le domaine de l'informatique. Au cours de mon apprentissage j'ai pu acquérir de nombreuses notions de développement mais je suis aussi en mesure de vous aider dans votre communication par le biais des réseaux sociaux ( exemple : Instagram, Facebook, TikTok, YouTube, Twitter...)</div>
+        </div>
+      </a>
+    </div>
+
+    <script id='fiverr-seller-widget-script-8cc4f058-45c5-4968-bc6d-2c622e08a43a' src='https://widgets.fiverr.com/api/v1/seller/antoine_gabriel?widget_id=8cc4f058-45c5-4968-bc6d-2c622e08a43a' data-config='{"category_name":"Digital Marketing"}' async='true' defer='true'></script>
+
+  </footer>
+
+  <!-- minimal JS pour le burger et ouverture/fermeture si tu veux activer -->
+  <script>
+    // placeholder functions referenced in HTML (pour éviter erreurs)
+    function closeSidebar(){ /* tu peux brancher ton sidebar ici */ }
+  </script>
+
+</body>
+</html>

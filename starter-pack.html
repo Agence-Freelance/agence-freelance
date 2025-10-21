@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Starter Pack - Agence Freelance</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="app.js">
+</head>
+<body class="body-starter-pack">
+
+    <!-- Burger Menu -->
+    <nav class="burger-menu-starter">
+        <div class="burger-logo">
+            <img src="logo.png" alt="Logo Starter Pack">
+        </div>
+        <ul class="nav-items-starter">
+            <li><a href="index.html">Accueil</a></li>
+            <li class="nav-item-submenu">Nos services
+                <ul class="submenu-starter">
+                    <li>Site Web
+                        <ul class="submenu-detail">
+                            <li><a href="offre-principal.html">Principal</a></li>
+                            <li><a href="offre-secondaire.html">Secondaire</a></li>
+                            <li><a href="offre-pro.html">Professionnelle</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="reseaux-sociaux.html">Réseaux sociaux</a></li>
+                </ul>
+            </li>
+            <li class="nav-item-submenu">Nos compétences
+                <ul class="submenu-starter">
+                    <li>À propos de nous</li>
+                    <li>Nos réalisations</li>
+                </ul>
+            </li>
+        </ul>
+        <div class="cta-contact-starter">
+            <button onclick="openSidebar()">Nous contacter</button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-content-starter-pack">
+        <div class="hero-text-starter">
+            <h1>Starter Pack</h1>
+            <h3>Adapté aux start-up et personnes à leur compte</h3>
+            <p>Économisez environ 20% du prix original grâce à notre pack complet !</p>
+            <button class="cta-hero-starter">Obtenez votre Starter Pack</button>
+        </div>
+        <div class="hero-image-starter">
+            <!-- Place pour image/logo -->
+            <img src="img illustration starter pack.jpg" alt="Starter Pack Illustration">
+        </div>
+    </section>
+
+    <!-- Offres Starter Pack -->
+    <section class="starter-pack-details">
+    <div class="pack-box-starter">
+        <h2>Offre Principale : Site vitrine One Page</h2>
+        <p>Prix : 99,99 €</p>
+        <ul class="pack-detail-list">
+            <li>Référencement SEO optimisé</li>
+            <li>Maintenance de base incluse</li>
+            <li>Nom de domaine offert la première année</li>
+            <li>1 seule page (CV, vitrine, présentation, etc.)</li>
+        </ul>
+    </div>
+
+    <div class="pack-box-starter">
+        <h2>Création de logo personnalisé</h2>
+        <p>Prix : 19,99 €</p>
+        <ul class="pack-detail-list">
+            <li>Logo 100 % sur mesure selon vos préférences</li>
+            <li>Révisions illimitées jusqu’à satisfaction complète</li>
+            <li>Fichiers livrés en haute qualité (PNG, SVG, PDF)</li>
+        </ul>
+    </div>
+
+    <div class="pack-box-starter">
+        <h2>Création et mise en place de comptes réseaux sociaux</h2>
+        <p>Prix : 49,99 €</p>
+        <ul class="pack-detail-list">
+            <li>Création des comptes sur les réseaux sociaux demandés</li>
+            <li>Mise en place de stories à la une de base</li>
+            <li>Ajout d’une biographie professionnelle et du logo</li>
+            <li>Exemple de contenu fourni pour bien démarrer</li>
+        </ul>
+    </div>
+
+    <div class="starter-pack-pricing">
+        <p class="starter-pack-pricing-old">Prix à l'unité : <span>169,97 €</span></p>
+        <p class="starter-pack-pricing-current">Prix Starter Pack : <span>139,99 €</span></p>
+    </div>
+</section>
+
+
+    <div class="starter-pack-cta">
+        <h2>Pourquoi choisir le Starter Pack ?</h2>
+        <p>
+        Le Starter Pack est conçu pour les start-ups et entrepreneurs individuels qui veulent démarrer rapidement et efficacement. 
+        Tous les services sont inclus : création de votre site vitrine, logo personnalisé et mise en place de vos réseaux sociaux.
+        Avec ce pack, vous économisez environ <strong>20%</strong> par rapport à l'achat des services séparés et vous n'avez plus rien à gérer.
+        </p>
+        <p>
+        Profitez d'une solution clé-en-main, avec un design professionnel, des animations et un suivi pour lancer votre projet dès aujourd’hui.
+        </p>
+        <button class="starter-pack-cta-btn">Je choisis cette offre !</button>
+    </div>
+
+    <!-- Liens vers autres offres -->
+<section class="starter-pack-links">
+    <h2>Découvrez aussi nos autres offres</h2>
+    <div class="starter-links-container">
+        <a href="package-business.html" class="starter-link-btn">Découvrir le Business Pack</a>
+        <a href="package-pro.html" class="starter-link-btn">Découvrir le Pro Pack</a>
+    </div>
+</section>
+
+
+
+    <!-- Footer -->
+    <footer class="footer-starter-pack">
+        <div class="footer-sections-starter">
+            <div class="footer-about-starter">
+                <h3>À propos</h3>
+                <p>Notre mission : aider les entrepreneurs à réussir leur lancement digital.</p>
+            </div>
+            <div class="footer-contact-starter">
+                <h3>Contact</h3>
+                <p>Email : agence_freelance@yahoo.com</p>
+                <p>Téléphone : +33 1 23 45 67 89</p>
+            </div>
+            <div class="footer-social-starter">
+                <h3>Suivez-nous</h3>
+                <a href="#">Facebook</a> | 
+                <a href="#">Instagram</a> | 
+                <a href="#">LinkedIn</a>
+            </div>
+        </div>
+        <div class="footer-bottom-starter">
+            <p>&copy; 2024 Exemple. <a href="conditions_utilisations.html">Tous droits réservés.</a></p>
+        </div>
+    </footer>
+
+    
+<div id="mouse-tracker"></div>
+
+<script>
+const tracker = document.getElementById('mouse-tracker');
+
+document.addEventListener('mousemove', (e) => {
+    tracker.style.left = e.clientX + 'px';
+    tracker.style.top = e.clientY + 'px';
+});
+</script>
+
+</body>
+</html>

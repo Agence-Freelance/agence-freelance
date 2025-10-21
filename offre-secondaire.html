@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Offre Secondaire</title>
+    <link rel="stylesheet" href="style-secondaire.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Dancing+Script:wght@400..700&display=swap" rel="stylesheet">
+
+    <style>
+
+      body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background-color: #f9f9f9;
+  color: #222;
+}
+
+.sticky {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 5%;
+  background: white;
+  border-bottom: 1px solid rgba(255, 0, 0, 0.15);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  transition: 0.3s ease;
+}
+
+.logo {
+  height: 55px;
+  border-radius: 55px;
+}
+
+.logo-offre-secondaire{
+  height: 75px;
+  border-radius: 75px;
+  left: 47.5%;
+  position: relative;
+}
+
+.barre-nav {
+  display: flex;
+  gap: 30px;
+  list-style: none;
+}
+
+.barre-nav li {
+  position: relative;
+  font-weight: bold;
+}
+
+.nav-item:hover .container-sub-menu {
+  opacity: 1;
+  pointer-events: all;
+  position: relative;
+}
+
+.container-sub-menu {
+  position: absolute;
+  top: 25px;
+  left: 0;
+  background: white;
+  border: 1px solid rgba(255, 0, 0, 0.2);
+  border-radius: 8px;
+  padding: 10px;
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.3s;
+}
+
+.text-barre {
+  color: #cc3b3b;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.text-barre:hover{
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+.container {
+  font-size: 2.2rem;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 2rem;
+  color: #b82e3d;
+}
+
+.mot-complement {
+  text-align: center;
+  color: #666;
+  font-style: italic;
+}
+
+#img_offre_2 {
+  width: 100%;
+  border-radius: 0;
+  margin-top: 20px;
+}
+
+.autre-offre {
+  text-align: center;
+  margin-top: 3rem;
+}
+
+.barre1-offre-secondaire,
+.barre2-offre-secondaire {
+  width: 80px;
+  height: 3px;
+  background: linear-gradient(to right, #ff6f61, #d9534f);
+  margin: 10px auto;
+  border-radius: 50px;
+}
+
+.titre-autre-offre {
+  color: #b82e3d;
+}
+
+.offre-content {
+  color: #fff;
+  background-color: #b82e3d;
+  padding: 8px 15px;
+  border-radius: 10px;
+  margin: 5px;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.offre-content:hover {
+  background-color: #d9534f;
+}
+
+/* --- Box présentation --- */
+.box-qui-sommes-nous-offre-secondaire {
+  width: 80%;
+  margin: 3rem auto;
+  background: #fff;
+  padding: 30px;
+  border-left: 6px solid #b82e3d;
+  border-radius: 15px;
+  box-shadow: 0 0 20px rgba(184, 46, 61, 0.1);
+  transition: 0.3s;
+}
+
+.box-qui-sommes-nous-offre-secondaire:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 25px rgba(184, 46, 61, 0.2);
+}
+
+.title-precision {
+  color: #b82e3d;
+}
+
+.txt-description a {
+  color: #b82e3d;
+  text-decoration: underline;
+}
+
+/* --- Offre --- */
+.pricing {
+  display: flex;
+  justify-content: center;
+  margin: 4rem 0;
+}
+
+.card {
+  background: white;
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 0 30px rgba(255, 0, 0, 0.1);
+  max-width: 500px;
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 0 40px rgba(255, 0, 0, 0.2);
+}
+
+.secondary-offer h2 {
+  color: #b82e3d;
+}
+
+.subtitle {
+  color: #999;
+}
+
+.features {
+  list-style: none;
+  padding: 0;
+}
+
+.features li {
+  margin: 10px 0;
+  color: #333;
+}
+
+.price {
+  font-weight: bold;
+  font-size: 1.3rem;
+  margin-top: 20px;
+  color: #b82e3d;
+}
+
+.cta {
+  background-color: #b82e3d;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 25px;
+  cursor: pointer;
+  transition: 0.3s;
+  margin-top: 30px;
+}
+
+.cta:hover {
+  background-color: #d9534f;
+  transform: translateY(-5px);
+  box-shadow:0px 2px 2px #222;
+}
+
+/* --- Processus --- */
+.title-processus-sec {
+  text-align: center;
+  margin-top: 4rem;
+  color: #b82e3d;
+}
+
+.barre-esthetique-sec {
+  width: 100px;
+  height: 4px;
+  background: linear-gradient(to right, #ff6f61, #d9534f);
+  margin: 10px auto;
+  border-radius: 50px;
+}
+
+/* Footer */
+footer {
+  background: #fff;
+  border-top: 1px solid rgba(255, 0, 0, 0.1);
+  padding: 2rem 0;
+  text-align: center;
+  position: relative;
+  top: 300px;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.footer-section h3 {
+  color: #b82e3d;
+}
+
+.footer-bottom {
+  margin-top: 20px;
+  color: #888;
+}
+
+
+/*DÉROULEMENT OFFRE CSS */
+
+@import url('https://fonts.googleapis.com/css?family=Nunito:400,900');
+
+
+
+
+
+/* Progress Container */
+.progress_inner {
+  position: relative;
+  left: 0;
+  right: 0;
+  top: 200px;
+  transform: translateY(-50%);
+  margin: auto;
+  height: 200px;
+  width: 700px;
+}
+
+
+/* Steps */
+.progress_inner__step {
+  width: 17%;
+  font-size: 14px;
+  padding: 0 10px;
+  transition: all 0.4s;
+  float: left;
+  text-align: center;
+  position: relative;
+}
+
+.progress_inner__step label {
+  padding-top: 50px;
+  top: -20px;
+  display: block;
+  position: relative;
+  cursor: pointer;
+}
+
+.progress_inner__step:before {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  margin: auto;
+  width: 30px;
+  height: 30px;
+  color: #7fb4cd;
+  background: white;
+  line-height: 30px;
+  border: 3px solid #a6cde2;
+  font-size: 12px;
+  border-radius: 100%;
+  transition: all .4s;
+  cursor: pointer;
+  pointer-events: none;
+  top: 3px;
+}
+
+.progress_inner__step:hover {
+  color: white;
+}
+
+.progress_inner__step:hover:before {
+  color: white;
+  background: #1ea4ec;
+}
+
+/* Step numbers */
+.progress_inner__step:nth-of-type(1):before { content: '1'; }
+.progress_inner__step:nth-of-type(2):before { content: '2'; }
+.progress_inner__step:nth-of-type(3):before { content: '3'; }
+.progress_inner__step:nth-of-type(4):before { content: '4'; }
+.progress_inner__step:nth-of-type(5):before { content: '5'; }
+
+/* Bars */
+.progress_inner__bar,
+.progress_inner__bar--set {
+  height: 6px;
+  left: 10%;
+  border-radius: 6px;
+  position: relative;
+  z-index: -1;
+}
+
+.progress_inner__bar {
+  background: repeating-linear-gradient(
+    45deg,
+    #1ea4ec,
+    #1ea4ec 4px,
+    #1f8bc5 4px,
+    #1f8bc5 10px
+  );
+  width: 0;
+  transition: width 800ms cubic-bezier(0.915, 0.015, 0.300, 1.005);
+}
+
+.progress_inner__bar--set {
+  width: 80%;
+  top: -6px;
+  background: #7fb4cd;
+  z-index: -2;
+}
+
+/* Tabs */
+.progress_inner__tabs .tab {
+  opacity: 0;
+  position: absolute;
+  left: 100px;
+  top: 40px;
+  text-align: left;
+  margin-top: 80px;
+  box-shadow: 0px 2px 1px #363636;
+  padding: 30px;
+  background: rgba(234, 234, 234, 0.585);
+  border-radius: 10px;
+  transition: all .2s;
+}
+
+.progress_inner__tabs .tab h1 {
+  margin: 0;
+}
+
+.progress_inner__tabs .tab p {
+  font-weight: 400;
+  opacity: 0.8;
+  margin-top: 20px;
+  margin-left: 20px;
+  padding: 20px;
+}
+
+/* Status box (gift box) */
+.progress_inner__status {
+  width: 40px;
+  height: 40px;
+  top: -80px;
+  transition: right 800ms cubic-bezier(0.915, 0.015, 0.300, 1.005);
+  transform: translateX(50%);
+  position: absolute;
+}
+
+.progress_inner__status div {
+  position: absolute;
+  opacity: 0;
+  transition: all 600ms cubic-bezier(0.915, 0.015, 0.300, 1.005);
+  transition-delay: 300ms;
+}
+
+.progress_inner__status .box_base {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  margin: auto;
+  background: repeating-linear-gradient(
+    45deg,
+    #986c5d,
+    #986c5d 2px,
+    #775144 2px,
+    #775144 4px
+  );
+  width: 36px;
+  height: 40px;
+  z-index: 1;
+  border-radius: 1px;
+  opacity: 0;
+}
+
+.progress_inner__status .box_lid {
+  width: 40px;
+  height: 13.3px;
+  background: #775144;
+  z-index: 2;
+  border-radius: 1px;
+  top: 0;
+  opacity: 0;
+}
+
+.progress_inner__status .box_item {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  margin: auto;
+  width: 20px;
+  height: 20px;
+  background: #be69d2;
+  z-index: 0;
+  border-radius: 4px;
+  transform: rotate(45deg);
+  opacity: 0;
+}
+
+.progress_inner__status .box_ribbon {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  margin: auto;
+  width: 10px;
+  height: 42px;
+  background: #ee0f29;
+  z-index: 4;
+  border-radius: 1px;
+  opacity: 0;
+}
+
+.progress_inner__status .box_bow {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  margin: auto;
+  top: -6px;
+  z-index: 1;
+  transition-delay: 500ms;
+}
+
+.progress_inner__status .box_bow__left,
+.progress_inner__status .box_bow__right {
+  width: 6px;
+  height: 10px;
+  background: #bb0c20;
+  position: absolute;
+  z-index: 3;
+  border-radius: 1px;
+  opacity: 1;
+}
+
+.progress_inner__status .box_bow__left {
+  left: 6px;
+  transform: rotate(45deg);
+}
+
+.progress_inner__status .box_bow__right {
+  left: -4px;
+  transform: rotate(-45deg);
+}
+
+.progress_inner__status .box_tag {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  margin: auto;
+  width: 20px;
+  height: 10px;
+  background: #487ac7;
+  z-index: 4;
+  transform: rotate(-10deg) translateX(-40px) translateY(0px);
+  border-radius: 2px;
+  transition-delay: 500ms;
+  opacity: 0;
+}
+
+.progress_inner__status .box_string {
+  width: 17px;
+  height: 2px;
+  background: #343434;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  margin: auto;
+  z-index: 4;
+  transform: rotate(-39deg) translateX(-22px) translateY(-12px);
+  opacity: 0;
+}
+
+/* Hide radio buttons */
+.progress_inner input[type="radio"] {
+  display: none;
+}
+/* Déplacement de la box cadeau selon l'étape */
+#step-1:checked ~ .progress_inner__status {
+  transform: translateX(0);
+}
+#step-1:checked ~ .progress_inner__status .box_base { opacity: 1; }
+
+/* Étape 2 */
+#step-2:checked ~ .progress_inner__status {
+  transform: translateX(190px);
+}
+#step-2:checked ~ .progress_inner__status .box_base { opacity: 1; }
+#step-2:checked ~ .progress_inner__status .box_item { opacity: 1; top: -10px; }
+
+/* Étape 3 */
+#step-3:checked ~ .progress_inner__status {
+  transform: translateX(330px);
+}
+#step-3:checked ~ .progress_inner__status .box_base { opacity: 1; }
+#step-3:checked ~ .progress_inner__status .box_item { opacity: 1; top: 10px; }
+#step-3:checked ~ .progress_inner__status .box_lid { opacity: 1; top: -1px; }
+
+/* Étape 4 */
+#step-4:checked ~ .progress_inner__status {
+  transform: translateX(470px);
+}
+#step-4:checked ~ .progress_inner__status .box_base { opacity: 1; }
+#step-4:checked ~ .progress_inner__status .box_item { opacity: 1; top: 10px; }
+#step-4:checked ~ .progress_inner__status .box_lid { opacity: 1; top: -1px; }
+#step-4:checked ~ .progress_inner__status .box_ribbon { opacity: 1; top: 50%; }
+#step-4:checked ~ .progress_inner__status .box_bow { opacity: 1; top: -10px; left: 15px;}
+
+/* Étape 5 */
+#step-5:checked ~ .progress_inner__status {
+  transform: translateX(600px);
+}
+#step-5:checked ~ .progress_inner__status .box_base { opacity: 1; }
+#step-5:checked ~ .progress_inner__status .box_item { opacity: 1; top: 10px; }
+#step-5:checked ~ .progress_inner__status .box_lid { opacity: 1; top: -1px; }
+#step-5:checked ~ .progress_inner__status .box_ribbon { opacity: 1; top: 50%; }
+#step-5:checked ~ .progress_inner__status .box_bow { opacity: 1; top: -10px; left: 15px;}
+#step-5:checked ~ .progress_inner__status .box_tag,
+#step-5:checked ~ .progress_inner__status .box_string { opacity: 1; top: 10px; left: 20px; }
+
+/* Step 1 */
+#step-1:checked ~ .progress_inner__tabs .tab:nth-of-type(1) {
+  opacity: 1;
+  top: 0;
+}
+
+/* Step 2 */
+#step-2:checked ~ .progress_inner__tabs .tab:nth-of-type(2) {
+  opacity: 1;
+  top: 0;
+}
+
+/* Step 3 */
+#step-3:checked ~ .progress_inner__tabs .tab:nth-of-type(3) {
+  opacity: 1;
+  top: 0;
+}
+
+/* Step 4 */
+#step-4:checked ~ .progress_inner__tabs .tab:nth-of-type(4) {
+  opacity: 1;
+  top: 0;
+}
+
+/* Step 5 */
+#step-5:checked ~ .progress_inner__tabs .tab:nth-of-type(5) {
+  opacity: 1;
+  top: 0;
+}
+
+    </style>
+</head>
+
+<body class="body-offre-secondaire">
+    <header>
+        <div class="sticky">
+            <div class="accueil-container">  
+                <a href="index.html" class="accueil-btn">Accueil</a>
+            </div>
+            <img src="logo.png" alt="logo" class="logo">
+            <ul class="barre-nav">
+                <li class="nav-item">Nos compétences
+                    <div><div class="l3"></div></div>
+                    <div class="container-sub-menu">
+                        <a class="text-barre" href="abouts_us.html">- About us</a><br>
+                        <a class="text-barre" href="#">- Nos réalisations</a>
+                    </div>
+                </li>
+                <div class="bulle-container">
+                    <a class="nav-item-1" href="contact.html">Nous contacter</a>
+                </div>
+            </ul>
+        </div>
+
+        <div class="container">NOTRE OFFRE SECONDAIRE</div>
+        <p class="mot-complement">Par agence_freelance</p>
+    </header>
+
+    <img id="img_offre_2" src="emile-perron-xrVDYZRGdw4-unsplash.jpg" alt="offre secondaire">
+
+    <div class="autre-offre">
+        <div class="barre1-offre-secondaire"></div>
+        <div class="barre2-offre-secondaire"></div>
+        <h2 class="titre-autre-offre">Nos autres offres :</h2><br>
+        <a class="offre-content" href="offre-principal.html">Offre Principale</a>
+        <a class="offre-content" href="offre-pro.html">Offre Professionnelle</a>
+    </div>
+
+    <div class="box-qui-sommes-nous-offre-secondaire">
+        <h1 class="title-precision">Mais qui sommes-nous ?</h1>
+        <p class="txt-description">
+            Nous sommes une micro-entreprise passionnée par le développement web. Nous avons pour but d'être à l'écoute de nos clients afin de leur proposer le site internet dont ils rêvent. 
+            <br>Tout commence par une relation de confiance entre le client et le développeur.
+            <br>Pour en savoir plus sur nous cliquez <a href="#">ici</a>.
+        </p>
+    </div>
+
+    <section class="pricing">
+        <div class="card secondary-offer">
+            <h2>Offre Secondaire</h2>
+            <p class="subtitle">Idéal pour les micro-entreprises</p>
+            <ul class="features">
+                <li>🔴 Jusqu’à <strong>5 pages personnalisées</strong> incluses</li>
+                <li>🔴 Pages supplémentaires sur demande</li>
+                <li>🔴 Design <strong>responsive</strong> (PC, tablette, mobile)</li>
+                <li>🔴 Formulaire de contact intégré</li>
+                <li>🔴 Newsletter incluse</li>
+                <li>🔴 Galerie illimitée (photos, projets)</li>
+                <li>🔴 Liens externes illimités</li>
+                <li>🔴 Footer complet inclus</li>
+                <li>🔴 Nom de domaine inclus</li>
+                <li>🔴 SEO de base</li>
+                <li>🔴 Chargement rapide et optimisation</li>
+                <li>🔴 Mise en place rapide</li>
+            </ul>
+            <div class="price">À partir de <span>390,99 €</span></div>
+            <button class="cta">Demander un devis</button>
+        </div>
+    </section>
+
+    <h2 class="title-processus-sec">Qu'est-ce qu’il se passe après ma demande ?</h2>
+    <div class="barre-esthetique-sec"></div>
+    <img class="logo-offre-secondaire" src="logo.png" alt="logo">
+
+    <div class="progress">
+        <div class="progress_inner">
+            <div class="progress_inner__step"><label for="step-1">Start order</label></div>
+            <div class="progress_inner__step"><label for="step-2">Prepare gift</label></div>
+            <div class="progress_inner__step"><label for="step-3">Pack gift</label></div>
+            <div class="progress_inner__step"><label for="step-4">Decorate box</label></div>
+            <div class="progress_inner__step"><label for="step-5">Send gift</label></div>
+
+            <input type="radio" name="step" id="step-1" checked>
+            <input type="radio" name="step" id="step-2">
+            <input type="radio" name="step" id="step-3">
+            <input type="radio" name="step" id="step-4">
+            <input type="radio" name="step" id="step-5">
+
+            <div class="progress_inner__bar"></div>
+            <div class="progress_inner__bar--set"></div>
+
+            <div class="progress_inner__tabs">
+                <div class="tab tab-0">
+                    <h1>Première prise de contact</h1>
+                    <p>Contact → Devis → Validation → Premier appel projet.</p>
+                </div>
+                <div class="tab tab-1">
+                    <h1>Conception maquette</h1>
+                    <p>Création des wireframes et ajustements jusqu’à validation.</p>
+                </div>
+                <div class="tab tab-2">
+                    <h1>Validation et acompte</h1>
+                    <p>Acompte 40%, validation finale des maquettes.</p>
+                </div>
+                <div class="tab tab-3">
+                    <h1>Développement du site</h1>
+                    <p>Intégration des contenus et suivi régulier du projet.</p>
+                </div>
+                <div class="tab tab-4">
+                    <h1>Livraison & maintenance</h1>
+                    <p>Livraison, ajustements finaux, formation rapide.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>À propos</h3>
+                <p>Découvrez notre mission et notre engagement à fournir des services de qualité.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <p>Email: agence_freelance@yahoo.com</p>
+                <p>Téléphone: +33 1 23 45 67 89</p>
+            </div>
+            <div class="footer-section">
+                <h3>Suivez-nous</h3>
+                <a href="#">Facebook</a> | 
+                <a href="#">Instagram</a> | 
+                <a href="#">LinkedIn</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Agence Freelance — Tous droits réservés.</p>
+        </div>
+    </footer>
+</body>
+</html>

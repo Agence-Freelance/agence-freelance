@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Business Pack - Agence Freelance</title>
+<style>
+
+/*======BARRE NAV ======*/
+
+.burger-menu-starter {
+    width: 100%;
+    background-color: rgba(15, 15, 20, 0.95);
+    padding: 10px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.burger-logo img {
+    width: 120px;
+    border-radius: 50%;
+}
+
+.logo {
+    position: relative;
+    display: block;
+    z-index: 1; /* ✅ plus bas que la nav-panel (qui est à 5000) */
+}
+
+.nav-panel-active .logo {
+    display: none; /* Le logo disparaît dès que le menu est ouvert */
+}
+
+
+
+.nav-items-starter {
+    display: flex;
+    list-style: none;
+    gap: 25px;
+}
+
+.nav-items-starter li {
+    position: relative;
+    cursor: pointer;
+    font-size: 18px;
+    transition: color 0.3s;
+}
+
+.nav-items-starter li:hover {
+    color: #ff4d4d; /* rouge vif futuriste */
+}
+
+.nav-items-starter li a {
+    color: #f7f2ec;
+    text-decoration: none;
+    font-size: 18px;
+    transition: color 0.3s;
+}
+
+.nav-items-starter li a:hover {
+    color: #ff4d4d; /* rouge vif au hover */
+}
+
+.nav-item-submenu:hover .submenu-starter {
+    display: block;
+}
+
+.submenu-starter {
+    display: none;
+    position: absolute;
+    top: 22px;
+    left: 0;
+    background-color: #111;
+    border-radius: 6px;
+    padding: 10px;
+    min-width: 200px;
+    box-shadow: 0 0 15px rgba(255, 77, 77, 0.3);
+    z-index: 10;
+}
+
+.submenu-starter li {
+    margin: 5px 0;
+    color: #f7f2ec;
+}
+
+.submenu-detail {
+    display: none;
+    margin-left: 15px;
+    margin-top: 3px;
+}
+
+.submenu-starter li:hover .submenu-detail {
+    display: block;
+}
+
+.cta-contact-starter button {
+    background-color: #f7f2ec;
+    color: #0a0a0a;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: transform 0.3s, background-color 0.3s, color 0.3s;
+}
+
+.cta-contact-starter button:hover {
+    transform: scale(1.05);
+    background-color: #ff4d4d;
+    color: #fff;
+}
+
+/* ===== BODY ===== */
+.body-business-pack {
+    background-color: #0a0a0a;
+    color: #f7f2ec;
+    font-family: 'Oswald', sans-serif;
+    overflow-x: hidden;
+}
+
+/* ===== HERO ===== */
+.hero-content-business-pack {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 80px 10%;
+    flex-wrap: wrap;
+}
+
+.hero-text-business {
+    flex: 1;
+    min-width: 300px;
+}
+
+.hero-image-business {
+    flex: 1;
+    text-align: center;
+}
+
+.hero-image-business img {
+    width: 500px;
+    max-width: 90%;
+    border-radius: 20px;
+    box-shadow: 0 0 30px rgba(255, 77, 77, 0.3);
+    animation: float 4s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+.hero-text-business h1 {
+    font-size: 50px;
+    margin-bottom: 15px;
+}
+
+.hero-text-business h3 {
+    color: #ff4d4d;
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+
+.cta-hero-business {
+    background-color: #f7f2ec;
+    color: #0a0a0a;
+    border: none;
+    margin-top: 20px;
+    padding: 12px 25px;
+    border-radius: 50px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.cta-hero-business:hover {
+    background-color: #ff4d4d;
+    color: #fff;
+    transform: scale(1.05);
+}
+
+/* ===== PACK DETAILS ===== */
+.business-pack-details {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px;
+    padding: 60px 10%;
+    justify-content: center;
+}
+
+.pack-box-business {
+    background-color: #111;
+    padding: 25px;
+    border-radius: 15px;
+    width: 300px;
+    transition: transform 0.3s, box-shadow 0.3s;
+    border: 1px solid transparent;
+}
+
+.pack-box-business:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 0 20px rgba(255, 77, 77, 0.3);
+    border: 1px solid #ff4d4d;
+}
+
+/* ===== PRICING ===== */
+.business-pack-pricing {
+    text-align: center;
+    margin-top: 40px;
+}
+
+.business-pack-pricing-old span {
+    text-decoration: line-through;
+    color: rgba(255,255,255,0.5);
+}
+
+.business-pack-pricing-current span {
+    color: #ff4d4d;
+    font-weight: bold;
+    font-size: 28px;
+}
+
+/* ===== CTA ===== */
+.business-pack-cta {
+    background-color: rgba(15,23,36,0.9);
+    padding: 40px 30px;
+    margin: 50px auto;
+    border-radius: 12px;
+    max-width: 900px;
+    text-align: center;
+    box-shadow: 0 0 20px rgba(255,77,77,0.3);
+}
+
+.business-pack-cta-btn {
+    background-color: #f7f2ec;
+    color: #0a0a0a;
+    font-weight: bold;
+    padding: 12px 25px;
+    margin-top: 30px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.business-pack-cta-btn:hover {
+    background-color: #ff4d4d;
+    color: #fff;
+    box-shadow: 0 0 15px rgba(255,77,77,0.6);
+}
+
+/* ===== LINKS ===== */
+.business-pack-links {
+    background-color: #0a0a0a;
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.business-link-btn {
+    display: inline-block;
+    padding: 14px 28px;
+    border-radius: 50px;
+    background-color: #0a0a0a;
+    color: rgba(255,255,255,0.9);
+    border: 2px solid rgba(255,255,255,0.1);
+    font-size: 18px;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.business-link-btn:hover {
+    background-color: #ff4d4d;
+    color: #fff;
+    transform: translateY(-3px);
+}
+
+/* ===== FOOTER ===== */
+.footer-business-pack {
+    background-color: #0f0f12;
+    color: #f7f2ec;
+    padding: 40px 10%;
+    margin-top: 50px;
+}
+
+.footer-business-pack a {
+    color: #ff4d4d;
+    text-decoration: none;
+}
+
+.footer-business-pack a:hover {
+    text-decoration: underline;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 992px) {
+    .hero-content-business-pack {
+        flex-direction: column;
+        text-align: center;
+        padding: 60px 5%;
+    }
+
+    .hero-text-business h1 {
+        font-size: 38px;
+    }
+
+    .hero-text-business h3 {
+        font-size: 20px;
+    }
+
+    .nav-items-starter {
+        flex-wrap: wrap;
+        gap: 15px;
+        justify-content: center;
+    }
+
+    .business-pack-details {
+        padding: 40px 5%;
+    }
+
+    .pack-box-business {
+        width: 90%;
+    }
+
+    .business-pack-cta {
+        padding: 30px 20px;
+    }
+}
+
+@media (max-width: 600px) {
+    .nav-items-starter {
+        display: none;
+    }
+
+    .cta-contact-starter button {
+        padding: 8px 15px;
+        font-size: 14px;
+    }
+
+    .hero-text-business h1 {
+        font-size: 32px;
+    }
+
+    .hero-image-business img {
+        width: 80%;
+    }
+
+    .business-link-btn {
+        width: 90%;
+        margin: 10px 0;
+        font-size: 16px;
+    }
+}
+
+/*BURGER MENU POUR SITE RESPONSIVE */
+
+.nav-panel {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 280px;
+    background: #111;
+    border-right: 2px solid #b8860b;
+    transform: translateX(-100%);
+    transition: transform 0.4s ease;
+    z-index: 2000; /* ✅ plus haut que la navbar */
+    padding-top: 80px;
+    z-index: 6000;
+    overflow-y: auto;
+}
+
+.nav-panel.active {
+    transform: translateX(0);
+}
+
+/* --- Sous-menu déroulant au survol --- */
+.nav-panel .submenu > ul {
+    display: none; /* par défaut caché */
+    flex-direction: column;
+    margin-top: 5px;
+    background: #1a1a1a;
+    border-left: 2px solid #ff4c4c; /* rouge léger */
+}
+
+.nav-panel .submenu:hover > ul {
+    display: flex; /* apparaît au survol */
+}
+
+.nav-panel .submenu > a {
+    cursor: default; /* ne réagit pas au clic */
+    color: #f5d76e;
+    font-weight: 600;
+}
+
+
+
+/* Bouton de fermeture */
+.close-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 28px;
+    color: #f5d76e;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.close-btn:hover {
+    color: #fff;
+}
+
+/* Liens visibles et propres */
+.nav-panel ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.nav-panel li {
+    padding: 15px 25px;
+}
+
+.nav-panel a {
+    color: #f5d76e;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 16px;
+    display: block;
+    transition: color 0.2s ease;
+    z-index: 2100; /* ✅ liens visibles */
+}
+
+.nav-panel a:hover {
+    color: #fff;
+}
+
+
+/* --- NAV PANEL (menu latéral) --- */
+.nav-panel {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 280px;
+    background: #111;
+    border-right: 2px solid #b8860b;
+    transform: translateX(-100%);
+    transition: transform 0.4s ease;
+    z-index: 999;
+    padding-top: 80px;
+}
+
+.nav-panel.active {
+    transform: translateX(0);
+}
+
+.nav-panel ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.nav-panel li {
+    padding: 15px 25px;
+}
+
+.nav-panel a {
+    color: #f5d76e;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+.nav-panel a:hover {
+    color: #fff;
+}
+
+/* Sous-menu */
+.nav-panel .submenu ul {
+    display: none;
+    padding-left: 15px;
+    border-left: 1px solid #b8860b;
+}
+
+.nav-panel .submenu.active ul {
+    display: block;
+}
+
+
+.burger {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 25px;
+    height: 18px;
+    cursor: pointer;
+}
+
+.burger .line {
+    height: 3px;
+    width: 100%;
+    background: linear-gradient(90deg, #b8860b, #f5d76e);
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+/* Animation burger ouvert */
+.burger.active .line:nth-child(1) {
+    transform: rotate(45deg) translateY(7px);
+}
+
+.burger.active .line:nth-child(2) {
+    opacity: 0;
+}
+
+.burger.active .line:nth-child(3) {
+    transform: rotate(-45deg) translateY(-7px);
+}
+
+/* Affichage mobile */
+@media (max-width: 900px) {
+    .burger {
+        display: flex;
+    }
+
+    nav ul {
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+        background-color: #111;
+        border-top: 1px solid #b8860b;
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(-10px);
+        transition: all 0.4s ease;
+    }
+
+    nav ul.active {
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateY(0);
+    }
+
+    nav ul li {
+        margin: 15px 0;
+    }
+}
+
+
+</style>
+</head>
+<body class="body-business-pack">
+
+    <!-- Navigation -->
+    <nav class="burger-menu-starter">
+        <div class="burger-logo">
+            <img class="logo" src="logo.png" alt="Logo Starter Pack">
+        </div>
+
+        <div class="burger">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+        </div>
+
+        <ul class="nav-items-starter">
+            <li><a href="index.html">Accueil</a></li>
+            <li class="nav-item-submenu">Nos services
+                <ul class="submenu-starter">
+                    <li>Site Web
+                        <ul class="submenu-detail">
+                            <li><a href="offre-principal.html">Principal</a></li>
+                            <li><a href="offre-secondaire.html">Secondaire</a></li>
+                            <li><a href="offre-pro.html">Professionnelle</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="reseaux-sociaux.html">Réseaux sociaux</a></li>
+                </ul>
+            </li>
+            <li class="nav-item-submenu">Nos compétences
+                <ul class="submenu-starter">
+                    <li><a href="abouts_us.html">À propos de nous</a></li>
+                    <li>Nos réalisations</li>
+                </ul>
+            </li>
+        </ul>
+        <div class="cta-contact-starter">
+            <button>Nous contacter</button>
+        </div>
+    </nav>
+
+    <div class="nav-panel">
+            <div class="close-btn">&times;</div>
+
+            <ul>
+                <li><a href="#">Accueil</a></li>
+                <li class="submenu">
+                    <a href="#">Nos sites web</a>
+                    <ul>
+                        <li><a href="#">Offre principale</a></li>
+                        <li><a href="#">Offre secondaire</a></li>
+                        <li><a href="#">Offre pro</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">Réseaux sociaux</a></li>
+                <li><a href="#">About us</a></li>
+                <li><a href="#">Portfolio</a></li>
+            </ul>
+        </div>
+
+    <!-- Hero -->
+    <section class="hero-content-business-pack">
+        <div class="hero-text-business">
+            <h1>Business Pack</h1>
+            <h3>Idéal pour les micro-entreprises et petites structures</h3>
+            <p>Profitez d’un pack complet et économisez environ 15% par rapport à l’achat séparé des services !</p>
+            <button class="cta-hero-business">Obtenez votre Business Pack</button>
+        </div>
+        <div class="hero-image-business">
+            <img src="img illustration business pack.jpg" alt="Business Pack Illustration">
+        </div>
+    </section>
+
+    <!-- Offres -->
+    <section class="business-pack-details">
+        <div class="pack-box-business">
+            <h2>Offre Secondaire : Site vitrine multi-pages</h2>
+            <p>Prix : 390,99 €</p>
+            <ul class="pack-detail-list">
+                <li>Formulaire de contact intégré</li>
+                <li>Maintenance et hébergement inclus 1 an</li>
+                <li>Référencement SEO optimisé</li>
+                <li>Nom de domaine offert la première année</li>
+            </ul>
+        </div>
+
+        <div class="pack-box-business">
+            <h2>Création de logo personnalisé</h2>
+            <p>Prix : 19,99 €</p>
+            <ul class="pack-detail-list">
+                <li>Logo sur mesure selon vos préférences</li>
+                <li>Révisions illimitées jusqu’à satisfaction</li>
+                <li>Fichiers livrés en haute qualité (PNG, SVG, PDF)</li>
+            </ul>
+        </div>
+
+        <div class="pack-box-business">
+            <h2>Mise en place des réseaux sociaux + 2 posts de lancement</h2>
+            <p>Prix : 49,99 €</p>
+            <ul class="pack-detail-list">
+                <li>Création des comptes demandés</li>
+                <li>Ajout du logo et d'une biographie professionnelle</li>
+                <li>Exemples de story à la une et contenu visuel</li>
+                <li>Publication de 2 posts d’ouverture</li>
+            </ul>
+        </div>
+
+        <div class="pack-box-business">
+            <h2>Gestion de contenu réseaux sociaux (1 mois)</h2>
+            <p>Prix : 129,99 €</p>
+            <ul class="pack-detail-list">
+                <li>Création et planification de posts professionnels</li>
+                <li>Stratégie de publication optimisée</li>
+                <li>Suivi de l’engagement et reporting basique</li>
+            </ul>
+        </div>
+
+        <div class="business-pack-pricing">
+            <p class="business-pack-pricing-old">Prix à l’unité : <span>590,96 €</span></p>
+            <p class="business-pack-pricing-current">Prix Business Pack : <span>499,99 €</span></p>
+        </div>
+    </section>
+
+    <!-- Section Explicative -->
+    <div class="business-pack-cta">
+        <h2>Pourquoi choisir le Business Pack ?</h2>
+        <p>
+            Le Business Pack s’adresse aux micro-entreprises et petites structures souhaitant une présence digitale professionnelle et complète.
+            Vous bénéficiez d’un site vitrine multi-pages, d’un logo sur mesure et d’une mise en place efficace de vos réseaux sociaux.
+        </p>
+        <p>
+            Grâce à ce pack, vous économisez environ <strong>90 €</strong> et gagnez du temps avec une solution clé-en-main, prête à booster votre activité.
+        </p>
+        <button class="business-pack-cta-btn">Je choisis cette offre !</button>
+    </div>
+
+    <!-- Liens -->
+    <section class="business-pack-links">
+        <h2>Découvrez aussi nos autres offres</h2>
+        <div class="business-links-container">
+            <a href="starter-pack.html" class="business-link-btn">Découvrir le Starter Pack</a>
+            <a href="package-pro.html" class="business-link-btn">Découvrir le Pro Pack</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer-business-pack">
+        <div class="footer-sections-business">
+            <div class="footer-about-business">
+                <h3>À propos</h3>
+                <p>Notre mission : accompagner les entreprises dans leur croissance digitale.</p>
+            </div>
+            <div class="footer-contact-business">
+                <h3>Contact</h3>
+                <p>Email : agence_freelance@yahoo.com</p>
+                <p>Téléphone : +33 1 23 45 67 89</p>
+            </div>
+            <div class="footer-social-business">
+                <h3>Suivez-nous</h3>
+                <a href="#">Facebook</a> | 
+                <a href="#">Instagram</a> | 
+                <a href="#">LinkedIn</a>
+            </div>
+        </div>
+        <div class="footer-bottom-business">
+            <p>&copy; 2024 Agence Freelance. <a href="conditions_utilisations.html">Tous droits réservés.</a></p>
+        </div>
+    </footer>
+
+    <script>
+const burger = document.querySelector('.burger');
+const navPanel = document.querySelector('.nav-panel');
+const submenu = document.querySelector('.submenu > a');
+const closeBtn = document.querySelector('.close-btn');
+
+burger.addEventListener('click', () => {
+    burger.classList.toggle('active');
+    navPanel.classList.toggle('active');
+});
+
+closeBtn.addEventListener('click', () => {
+    burger.classList.remove('active');
+    navPanel.classList.remove('active');
+});
+
+submenu.addEventListener('click', (e) => {
+    e.preventDefault();
+    submenu.parentElement.classList.toggle('active');
+});
+
+function openNavPanel() {
+    document.body.classList.add('nav-panel-active');
+    document.querySelector('.nav-panel').style.left = '0';
+}
+
+function closeNavPanel() {
+    document.body.classList.remove('nav-panel-active');
+    document.querySelector('.nav-panel').style.left = '-300px';
+}
+
+</script>
+
+
+
+</body>
+</html>

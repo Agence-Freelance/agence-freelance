@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Spicy+Rice&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap" rel="stylesheet">
+<style>
+ /* =========================
+   RESET GLOBAL
+========================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: #f8fafc;
+  color: #1a1a1a;
+  line-height: 1.6;
+}
+
+/* =========================
+   NAVBAR
+========================= */
+header {
+  position: relative;
+}
+
+.sticky {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 80px;
+  background: rgba(255, 255, 255, 0.97);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 5%;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  z-index: 1000;
+  transition: transform 0.35s ease-in-out, background 0.3s ease-in-out;
+}
+
+.sticky.hide {
+  transform: translateY(-100%);
+}
+
+/* LOGO */
+.logo {
+  height: 55px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  border-radius: 55px;
+  left: 85px;
+  position: relative;
+}
+.logo:hover {
+  transform: scale(1.05);
+}
+
+.logo-offre-principal{
+  height: 80px;
+  border-radius: 80px;
+  left: 70%;
+  position: relative;
+  top: -50px;
+}
+
+/* NAV LINKS */
+.barre-nav {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+.nav-item,
+.nav-item-1 {
+  position: relative;
+  font-weight: 500;
+  font-size: 0.95rem;
+  cursor: pointer;
+  color: #1a1a1a;
+  transition: color 0.3s ease;
+}
+
+.nav-item:hover,
+.nav-item-1:hover {
+  color: #009688;
+}
+
+/* SUBMENU */
+.container-sub-menu {
+  display: none;
+  position: absolute;
+  top: 40px;
+  left: 0;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  padding: 10px 15px;
+  min-width: 180px;
+}
+
+.nav-item:hover .container-sub-menu {
+  display: block;
+}
+
+.text-barre {
+  text-decoration: none;
+  color: #333;
+  font-size: 0.9rem;
+  display: block;
+  margin: 6px 0;
+}
+
+.text-barre:hover {
+  color: #009688;
+}
+
+/* =========================
+   BURGER MENU (MOBILE)
+========================= */
+.burger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  gap: 5px;
+}
+.burger div {
+  width: 25px;
+  height: 3px;
+  background: #333;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+.burger.active div:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+.burger.active div:nth-child(2) {
+  opacity: 0;
+}
+.burger.active div:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+
+/* =========================
+   HERO / INTRO
+========================= */
+.container {
+  text-align: center;
+  margin-top: 120px;
+  font-size: 2rem;
+  font-weight: 600;
+  color: #009688;
+  letter-spacing: 1px;
+}
+
+.mot-complement {
+  text-align: center;
+  color: #666;
+  font-size: 1.1rem;
+  margin-top: 8px;
+}
+
+.img-presentation-offre-princ {
+  width: 100%;
+  height: 480px;
+  object-fit: cover;
+  border-radius: 0 0 25px 25px;
+  margin-top: 25px;
+}
+
+.titre-autre-offre{
+  position: relative;
+  left: 4%;
+  top: 8px;
+}
+
+.barre-esthetique-titre-autre-offre{
+  position: relative;
+  top: -20px;
+  left: 3%;
+  height: 3px;
+  width: 220px;
+  background-color: #009688;
+  border-radius: 20px;
+}
+
+.offre-content{
+  text-decoration: none;
+  display: inline-flex;
+  margin-left: 80px;
+  color: #1a1a1a;
+  top: -60px;
+  padding: 0px;
+  position: relative;
+  left: 30%;
+  padding: 15px 20px;
+  text-align: center;
+  font-size: 1.2rem;
+  height: 60px;
+  width: auto;
+  background-color: #00796b;
+  border-radius: 50px;
+  transition: all 0.3s;
+}
+
+.offre-content:hover{
+  border: 1px solid #00796b;
+  background-color: whitesmoke;
+  transform: translateY(-5px);
+}
+
+/* =========================
+   SECTION "QUI SOMMES-NOUS"
+========================= */
+.box-qui-sommes-nous {
+  background: #ffffff;
+  max-width: 900px;
+  margin: 70px auto;
+  padding: 45px;
+  border-radius: 18px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+.box-qui-sommes-nous:hover {
+  transform: translateY(-5px);
+}
+.title-precision {
+  color: #009688;
+  font-size: 2rem;
+  margin-bottom: 18px;
+}
+.txt-description {
+  font-size: 1rem;
+  color: #444;
+}
+.txt-description a {
+  color: #009688;
+  text-decoration: underline;
+}
+
+/* =========================
+   OFFERS SECTION
+========================= */
+.offers-comparison {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 40px;
+  margin: 80px auto;
+  padding: 0 5%;
+}
+.offer-card {
+  background: #fff;
+  width: 450px;
+  padding: 35px;
+  border-radius: 20px;
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.07);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.offer-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
+  border:2px solid rgba(229, 213, 182, 0.9);
+}
+.offer-title {
+  color: #009688;
+  font-size: 1.4rem;
+  margin-bottom: 10px;
+}
+.offer-intro {
+  color: #555;
+  font-size: 0.95rem;
+  margin-bottom: 20px;
+}
+.features-list {
+  list-style: none;
+  margin-bottom: 25px;
+}
+.features-list li {
+  margin-bottom: 8px;
+  font-size: 0.95rem;
+}
+.cta-btn1 {
+  background: #009688;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  padding: 12px 22px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+.cta-btn1:hover {
+  background: #00796b;
+  transform: scale(1.03);
+}
+
+/* =========================
+   FOOTER
+========================= */
+footer {
+  background-color: #0f1724;
+  color: #fff;
+  padding: 70px 5% 40px;
+  position: relative;
+  top: 500px;
+}
+.footer-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 40px;
+}
+.footer-section h3 {
+  margin-bottom: 12px;
+  color: #00bfa5;
+}
+.footer-section a {
+  color: #fff;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+.footer-section a:hover {
+  color: #00bfa5;
+}
+.footer-bottom {
+  text-align: center;
+  margin-top: 40px;
+  font-size: 0.9rem;
+  color: #aaa;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+@media screen and (max-width: 992px) {
+  .barre-nav {
+    position: absolute;
+    top: 80px;
+    right: 0;
+    width: 100%;
+    background: #fff;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px 0;
+    gap: 25px;
+    display: none;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  }
+
+  .barre-nav.active {
+    display: flex;
+    animation: fadeIn 0.3s ease forwards;
+  }
+
+  .burger {
+    display: flex;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-15px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .offer-card {
+    width: 100%;
+  }
+
+  .box-qui-sommes-nous {
+    margin: 50px 20px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .container {
+    font-size: 1.6rem;
+  }
+  .mot-complement {
+    font-size: 1rem;
+  }
+  .footer-container {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+
+/*DÉROULEMENT OFFRE CSS */
+
+@import url('https://fonts.googleapis.com/css?family=Nunito:400,900');
+
+
+
+
+
+/* Progress Container */
+.progress_inner {
+  position: relative;
+  left: 0;
+  right: 0;
+  top: 200px;
+  transform: translateY(-50%);
+  margin: auto;
+  height: 200px;
+  width: 700px;
+}
+
+
+/* Steps */
+.progress_inner__step {
+  width: 20%;
+  font-size: 14px;
+  padding: 0 10px;
+  transition: all 0.4s;
+  float: left;
+  text-align: center;
+  position: relative;
+}
+
+.progress_inner__step label {
+  padding-top: 50px;
+  top: -20px;
+  display: block;
+  position: relative;
+  cursor: pointer;
+}
+
+.progress_inner__step:before {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  margin: auto;
+  width: 30px;
+  height: 30px;
+  color: #7fb4cd;
+  background: white;
+  line-height: 30px;
+  border: 3px solid #a6cde2;
+  font-size: 12px;
+  border-radius: 100%;
+  transition: all .4s;
+  cursor: pointer;
+  pointer-events: none;
+  top: 3px;
+}
+
+.progress_inner__step:hover {
+  color: white;
+}
+
+.progress_inner__step:hover:before {
+  color: white;
+  background: #1ea4ec;
+}
+
+/* Step numbers */
+.progress_inner__step:nth-of-type(1):before { content: '1'; }
+.progress_inner__step:nth-of-type(2):before { content: '2'; }
+.progress_inner__step:nth-of-type(3):before { content: '3'; }
+.progress_inner__step:nth-of-type(4):before { content: '4'; }
+.progress_inner__step:nth-of-type(5):before { content: '5'; }
+
+/* Bars */
+.progress_inner__bar,
+.progress_inner__bar--set {
+  height: 6px;
+  left: 10%;
+  border-radius: 6px;
+  position: relative;
+  z-index: -1;
+}
+
+.progress_inner__bar {
+  background: repeating-linear-gradient(
+    45deg,
+    #1ea4ec,
+    #1ea4ec 4px,
+    #1f8bc5 4px,
+    #1f8bc5 10px
+  );
+  width: 0;
+  transition: width 800ms cubic-bezier(0.915, 0.015, 0.300, 1.005);
+}
+
+.progress_inner__bar--set {
+  width: 80%;
+  top: -6px;
+  background: #7fb4cd;
+  z-index: -2;
+}
+
+/* Tabs */
+.progress_inner__tabs .tab {
+  opacity: 0;
+  position: absolute;
+  left: 40px;
+  top: 40px;
+  text-align: left;
+  margin-top: 80px;
+  box-shadow: 0px 2px 1px #363636;
+  padding: 30px;
+  background: rgba(234, 234, 234, 0.585);
+  border-radius: 10px;
+  transition: all .2s;
+}
+
+.progress_inner__tabs .tab h1 {
+  margin: 0;
+}
+
+.progress_inner__tabs .tab p {
+  font-weight: 400;
+  opacity: 0.8;
+  margin-top: 20px;
+  margin-left: 20px;
+  padding: 20px;
+}
+
+/* Status box (gift box) */
+.progress_inner__status {
+  width: 40px;
+  height: 40px;
+  top: -80px;
+  transition: right 800ms cubic-bezier(0.915, 0.015, 0.300, 1.005);
+  transform: translateX(50%);
+  position: absolute;
+}
+
+.progress_inner__status div {
+  position: absolute;
+  opacity: 0;
+  transition: all 600ms cubic-bezier(0.915, 0.015, 0.300, 1.005);
+  transition-delay: 300ms;
+}
+
+.progress_inner__status .box_base {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  margin: auto;
+  background: repeating-linear-gradient(
+    45deg,
+    #986c5d,
+    #986c5d 2px,
+    #775144 2px,
+    #775144 4px
+  );
+  width: 36px;
+  height: 40px;
+  z-index: 1;
+  border-radius: 1px;
+  opacity: 0;
+}
+
+.progress_inner__status .box_lid {
+  width: 40px;
+  height: 13.3px;
+  background: #775144;
+  z-index: 2;
+  border-radius: 1px;
+  top: 0;
+  opacity: 0;
+}
+
+.progress_inner__status .box_item {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  margin: auto;
+  width: 20px;
+  height: 20px;
+  background: #be69d2;
+  z-index: 0;
+  border-radius: 4px;
+  transform: rotate(45deg);
+  opacity: 0;
+}
+
+.progress_inner__status .box_ribbon {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  margin: auto;
+  width: 10px;
+  height: 42px;
+  background: #ee0f29;
+  z-index: 4;
+  border-radius: 1px;
+  opacity: 0;
+}
+
+.progress_inner__status .box_bow {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  margin: auto;
+  top: -6px;
+  z-index: 1;
+  transition-delay: 500ms;
+}
+
+.progress_inner__status .box_bow__left,
+.progress_inner__status .box_bow__right {
+  width: 6px;
+  height: 10px;
+  background: #bb0c20;
+  position: absolute;
+  z-index: 3;
+  border-radius: 1px;
+  opacity: 1;
+}
+
+.progress_inner__status .box_bow__left {
+  left: 6px;
+  transform: rotate(45deg);
+}
+
+.progress_inner__status .box_bow__right {
+  left: -4px;
+  transform: rotate(-45deg);
+}
+
+.progress_inner__status .box_tag {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  margin: auto;
+  width: 20px;
+  height: 10px;
+  background: #487ac7;
+  z-index: 4;
+  transform: rotate(-10deg) translateX(-40px) translateY(0px);
+  border-radius: 2px;
+  transition-delay: 500ms;
+  opacity: 0;
+}
+
+.progress_inner__status .box_string {
+  width: 17px;
+  height: 2px;
+  background: #343434;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  margin: auto;
+  z-index: 4;
+  transform: rotate(-39deg) translateX(-22px) translateY(-12px);
+  opacity: 0;
+}
+
+/* Hide radio buttons */
+.progress_inner input[type="radio"] {
+  display: none;
+}
+/* Déplacement de la box cadeau selon l'étape */
+#step-1:checked ~ .progress_inner__status {
+  transform: translateX(0);
+}
+#step-1:checked ~ .progress_inner__status .box_base { opacity: 1; }
+
+/* Étape 2 */
+#step-2:checked ~ .progress_inner__status {
+  transform: translateX(190px);
+}
+#step-2:checked ~ .progress_inner__status .box_base { opacity: 1; }
+#step-2:checked ~ .progress_inner__status .box_item { opacity: 1; top: -10px; }
+
+/* Étape 3 */
+#step-3:checked ~ .progress_inner__status {
+  transform: translateX(330px);
+}
+#step-3:checked ~ .progress_inner__status .box_base { opacity: 1; }
+#step-3:checked ~ .progress_inner__status .box_item { opacity: 1; top: 10px; }
+#step-3:checked ~ .progress_inner__status .box_lid { opacity: 1; top: -1px; }
+
+/* Étape 4 */
+#step-4:checked ~ .progress_inner__status {
+  transform: translateX(470px);
+}
+#step-4:checked ~ .progress_inner__status .box_base { opacity: 1; }
+#step-4:checked ~ .progress_inner__status .box_item { opacity: 1; top: 10px; }
+#step-4:checked ~ .progress_inner__status .box_lid { opacity: 1; top: -1px; }
+#step-4:checked ~ .progress_inner__status .box_ribbon { opacity: 1; top: 50%; }
+#step-4:checked ~ .progress_inner__status .box_bow { opacity: 1; top: -10px; left: 15px;}
+
+/* Étape 5 */
+#step-5:checked ~ .progress_inner__status {
+  transform: translateX(600px);
+}
+#step-5:checked ~ .progress_inner__status .box_base { opacity: 1; }
+#step-5:checked ~ .progress_inner__status .box_item { opacity: 1; top: 10px; }
+#step-5:checked ~ .progress_inner__status .box_lid { opacity: 1; top: -1px; }
+#step-5:checked ~ .progress_inner__status .box_ribbon { opacity: 1; top: 50%; }
+#step-5:checked ~ .progress_inner__status .box_bow { opacity: 1; top: -10px; left: 15px;}
+#step-5:checked ~ .progress_inner__status .box_tag,
+#step-5:checked ~ .progress_inner__status .box_string { opacity: 1; top: 10px; left: 20px; }
+
+/* Step 1 */
+#step-1:checked ~ .progress_inner__tabs .tab:nth-of-type(1) {
+  opacity: 1;
+  top: 0;
+}
+
+/* Step 2 */
+#step-2:checked ~ .progress_inner__tabs .tab:nth-of-type(2) {
+  opacity: 1;
+  top: 0;
+}
+
+/* Step 3 */
+#step-3:checked ~ .progress_inner__tabs .tab:nth-of-type(3) {
+  opacity: 1;
+  top: 0;
+}
+
+/* Step 4 */
+#step-4:checked ~ .progress_inner__tabs .tab:nth-of-type(4) {
+  opacity: 1;
+  top: 0;
+}
+
+/* Step 5 */
+#step-5:checked ~ .progress_inner__tabs .tab:nth-of-type(5) {
+  opacity: 1;
+  top: 0;
+}
+
+
+
+
+</style>
+    <title>Offre principal</title>
+</head>
+
+
+
+<body class="body-offre-princ">
+    <header>
+        <div class="sticky">
+            <div class="accueil-container">  
+                <a href="index.html" class="accueil-btn">Accueil</a>
+            </div>
+
+            <img src="logo.png" alt="logo" class="logo">
+        
+            <ul class="barre-nav">
+                <li class="nav-item">Nos compétences
+                    <div>
+                        <div class="l3"></div>
+                    </div>
+                    <div class="container-sub-menu">
+                        <a class="text-barre" href="">- About us</a><br>
+                        <a class="text-barre" href="">- Nos réalisations</a>
+                    </div>
+                </li>
+
+                <div class="bulle-container">
+                    <a class="nav-item-1" href="contact.html">Nous contacter</a>
+                </div>
+            </ul>
+        </div>
+
+        <div class="container">NOTRE OFFRE PRINCIPALE</div>
+        <p class="mot-complement">Par agence_freelance</p>
+    </header>
+
+    <img class="img-presentation-offre-princ" src="vecteezy_laptop-mockup-in-home-office_1269545.jpg">
+
+    <img src="logo.png" class="logo">
+
+    <div class="autre-offre">
+        <div class="barre1"></div>
+        <div class="barre2"></div>
+        <h2 class="titre-autre-offre">Nos autre offres :</h2><br>
+        <div class="barre-esthetique-titre-autre-offre"></div>  
+            <a class = "offre-content" href="offre-secondaire.html">Offre Secondaire</a>
+            <a class = "offre-content" href="offre-pro.html">Offre Professionelle</a>
+    </div>
+    <div class="box-qui-sommes-nous">
+        <h1 class="title-precision">Mais qui sommes-nous ?</h1>
+        <p class="txt-description">Nous sommes une micro-entreprise passioné par le développement web. Nous avons pour but d'être le plus 
+            proche de nos clients afin d'être a l'écoute de leur exigences et proposer le site internet dont ils rêvent.
+            <br>Cela passe tout d'abord par une relation étroite entre le client et le vendeur.
+            Pour en savoir plus sur nous cliquez <a href="">ici</a> 
+        </p>
+    </div>
+
+    <section class="offers-comparison">
+  <div class="offer-card onepage">
+    <header class="offer-header">
+      <h1 class="offer-title">Offre — Site Vitrine One Page</h1>
+      <p class="offer-intro">
+        Idéal pour les personnes souhaitant démarrer leur présence en ligne sans se ruiner :
+        un site professionnel, rapide et élégant, pensé pour convertir vos visiteurs et facile à maintenir.
+        Parfait si vous voulez une communication claire, une mise en ligne rapide et un rendu moderne
+        sur tous les appareils.
+      </p>
+    </header>
+    <ul class="features-list">
+      <li>✅ Une page unique moderne et optimisée</li>
+      <li>✅ Design responsive (ordinateur / tablette / mobile)</li>
+      <li>✅ Photos illimitées (galerie intégrée)</li>
+      <li>✅ Liens externes illimités (réseaux sociaux, plateformes…)</li>
+      <li>✅ Footer inclus (mentions légales, contact, liens pratiques)</li>
+      <li>✅ Nom de domaine inclus (en accord avec le client)</li>
+      <li>✅ SEO de base (titres, descriptions, mots-clés)</li>
+      <li>✅ Chargement rapide grâce à une structure légère</li>
+      <li>✅ Mise en place rapide (site prêt en quelques jours)</li>
+    </ul>
+    <div class="cta-area1">
+      <button class="cta-btn1">Je démarre mon projet One Page</button>
+    </div>
+  </div>
+
+  <div class="offer-card multipage">
+    <header class="offer-header">
+      <h1 class="offer-title">Offre — Site Vitrine Multi Pages</h1>
+      <p class="offer-intro">
+        Adapté aux entreprises et indépendants qui souhaitent présenter plusieurs services, projets ou contenus.
+        Le tarif minimal affiché correspond à <strong>5 pages incluses</strong>. 
+        Le prix final peut évoluer en fonction du nombre de pages supplémentaires désirées.
+      </p>
+    </header>
+    <ul class="features-list">
+      <li>✅ Plusieurs pages personnalisées (Accueil, À propos, Services, Blog, Contact, etc.)</li>
+      <li>✅ Design responsive (ordinateur / tablette / mobile)</li>
+      <li>✅ Portfolio / galerie intégrée (photos illimitées, projets)</li>
+      <li>✅ Liens externes illimités (réseaux sociaux, partenaires…)</li>
+      <li>✅ Formulaire de contact inclus</li>
+      <li>✅ Inscription newsletter (capter et fidéliser des prospects)</li>
+      <li>✅ Footer complet (mentions légales, liens pratiques, réseaux sociaux)</li>
+      <li>✅ Nom de domaine inclus</li>
+      <li>✅ SEO de base (titres, descriptions, mots-clés optimisés)</li>
+      <li>✅ Possibilité d’ajouter des pages illimitées à tout moment</li>
+      <li>✅ Chargement rapide et optimisation technique</li>
+      <li>✅ Mise en place rapide avec un site fonctionnel dès la livraison</li>
+    </ul>
+    <div class="cta-area1">
+      <button class="cta-btn1">Je démarre mon projet Multi Pages</button>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- EXPLICATIONS PROCESSUS :  -->
+
+<h2 class="title-processus">Qu'est ce qu'il se passe après ma demande ?</h2>
+<div class="barre-esthetique"></div>
+<img class="logo-offre-principal" src="logo.png" alt="logo">
+
+<div class="progress">
+  <div class="progress_inner">
+
+    <!-- Étapes -->
+    <div class="progress_inner__step">
+      <label for="step-1">Start order</label>
+    </div>
+    <div class="progress_inner__step">
+      <label for="step-2">Prepare gift</label>
+    </div>
+    <div class="progress_inner__step">
+      <label for="step-3">Pack gift</label>
+    </div>
+    <div class="progress_inner__step">
+      <label for="step-4">Decorate box</label>
+    </div>
+    <div class="progress_inner__step">
+      <label for="step-5">Send gift</label>
+    </div>
+
+    <!-- Inputs radio -->
+    <input type="radio" name="step" id="step-1" checked="checked">
+    <input type="radio" name="step" id="step-2">
+    <input type="radio" name="step" id="step-3">
+    <input type="radio" name="step" id="step-4">
+    <input type="radio" name="step" id="step-5">
+
+    <!-- Barres de progression -->
+    <div class="progress_inner__bar"></div>
+    <div class="progress_inner__bar--set"></div>
+
+    <!-- Contenu des tabs -->
+    <div class="progress_inner__tabs">
+      <div class="tab tab-0">
+        <h1>Première prise de contact et découverte</h1>
+        <p>1- Vous nous contactez via formulaire, email ou téléphone.<br>
+        2- nous analysons votre besoin et nous vous renvoyons un devis structuré<br>
+        3- Validation du devis ou demande de révision par vous même<br>
+        4- Premier appel pour définir en détail votre projet </p>
+      </div>
+      <div class="tab tab-1">
+        <h1>Conception de la maquette (wireframes)</h1>
+        <p>1- Suite à l'appel convenu, votre consultant vous prépare une maquette visuelle du site.<br>
+            2- Puis nous vous retournons les maquettes pour les ajuster à vos goûts, autant de fois qu'il le faut.<br>
+        </p>
+      </div>
+      <div class="tab tab-2">
+        <h1>Validation du design et acompte</h1>
+        <p>1- Le client effectue un premier acompte de 40% du montant total.<br>
+        2- En même temps, envoie des maquettes finalisées<br>
+    3- Validation du design final avec le client pour que le site corresponde exactement à ses attentes.</p>
+      </div>
+      <div class="tab tab-3">
+        <h1>Développement du site</h1>
+        <p>1- Les développeurs web prennent en charge le projet.<br>
+        2- Intégration des contenus, fonctionnalités et styles validés.<br>
+    3- Suivi régulier avec le consultant pour garantir que le site respecte le design validé.</p>
+      </div>
+      <div class="tab tab-4">
+        <h1>Livraison et maintenance</h1>
+        <p>1- Livraison du site finalisé au client et la somme restante doit être payé.<br>
+        2- Ajustements finaux si nécessaire (modifications mineures ou corrections).<br>
+    3- Si inclus dans le package, mise en place d’un support et maintenance continue : mises à jour, sécurité, sauvegardes.<br>
+4- Suivi post-livraison de 1 semaine + formation rapide (2h environ) sur demande du client.</p>
+      </div>
+    </div>
+
+    <!-- Status avec boîte cadeau -->
+    <div class="progress_inner__status">
+      <div class="box_base"></div>
+      <div class="box_lid"></div>
+      <div class="box_ribbon"></div>
+      <div class="box_bow">
+        <div class="box_bow__left"></div>
+        <div class="box_bow__right"></div>
+      </div>
+      <div class="box_item"></div>
+      <div class="box_tag"></div>
+      <div class="box_string"></div>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>À propos</h3>
+                <p>Découvrez notre mission et notre engagement à fournir des services de qualité.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <p>Email: agence_freelance@yahoo.com</p>
+                <p>Téléphone: +33 1 23 45 67 89</p>
+            </div>
+            <div class="footer-section">
+                <h3>Suivez-nous</h3>
+                <a href="#">Facebook</a> | 
+                <a href="#">Instagram</a> | 
+                <a href="#">LinkedIn</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Exemple. <a href="conditions_utilisations.html">Tous droits réservés.</a></p>
+        </div>
+
+        <!-- Put this code anywhere in the body of your page where you want the badge to show up. -->
+
+        <div itemscope itemtype='http://schema.org/Person' class='fiverr-seller-widget' style='display: inline-block;'>
+            <a itemprop='url' href=https://www.fiverr.com/antoine_gabriel rel="nofollow" target="_blank" style='display: inline-block;'>
+            <div class='fiverr-seller-content' id='fiverr-seller-widget-content-8cc4f058-45c5-4968-bc6d-2c622e08a43a' itemprop='contentURL' style='display: none;'></div>
+            <div id='fiverr-widget-seller-data' style='display: none;'>
+                <div itemprop='name' >antoine_gabriel</div>
+                <div itemscope itemtype='http://schema.org/Organization'><span itemprop='name'>Fiverr</span></div>
+                <div itemprop='jobtitle'>Seller</div>
+                <div itemprop='description'>Bonjour, je suis étudiant dans dans le domaine de l'informatique. Au cours de mon apprentissage j'ai pu acquérir de nombreuses notions de développement mais je suis aussi en mesure de vous aider dans votre communication par le biais des réseaux sociaux ( exemple : Instagram, Facebook, TikTok, YouTube, Twitter...)</div>
+            </div>
+        </a>
+        </div>
+        
+
+        <script id='fiverr-seller-widget-script-8cc4f058-45c5-4968-bc6d-2c622e08a43a' src='https://widgets.fiverr.com/api/v1/seller/antoine_gabriel?widget_id=8cc4f058-45c5-4968-bc6d-2c622e08a43a' data-config='{"category_name":"Digital Marketing"}' async='true' defer='true'></script>
+
+    </footer>
+
+    
+    <script src="app.js"></script>
+</body>
+</html>
+
+

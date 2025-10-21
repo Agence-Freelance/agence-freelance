@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pro Pack</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* ====== STYLE SPÉCIFIQUE PRO PACK ====== */
+    body.body-pro-pack {
+      background-color: #0a0a0a;
+      color: #f2f2f2;
+      font-family: 'Poppins', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* Hero Section */
+    .hero-pro-pack {
+      text-align: center;
+      padding: 120px 20px 80px;
+      background: radial-gradient(circle at top, rgba(212,175,55,0.2), transparent 70%);
+      position: relative;
+    }
+
+    .hero-pro-pack h1 {
+      font-size: 3rem;
+      color: #d4af37;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      animation: fadeInDown 1.2s ease;
+    }
+
+    .hero-pro-pack p {
+      font-size: 1.2rem;
+      margin-top: 10px;
+      opacity: 0.85;
+    }
+
+    /* Burger menu */
+    .burger-menu {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      z-index: 999;
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 28px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .burger-menu:hover {
+      transform: scale(1.1);
+      color: #d4af37;
+    }
+
+    .nav-menu {
+      position: fixed;
+      top: 0;
+      left: -100%;
+      width: 70%;
+      height: 100%;
+      background: rgba(10,10,10,0.95);
+      backdrop-filter: blur(6px);
+      transition: left 0.4s ease;
+      z-index: 998;
+      padding-top: 100px;
+    }
+
+    .nav-menu.active {
+      left: 0;
+    }
+
+    .nav-menu ul {
+      list-style: none;
+      padding: 0;
+      text-align: left;
+    }
+
+    .nav-menu ul li {
+      margin: 20px 30px;
+    }
+
+    .nav-menu ul li a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 1.1rem;
+      transition: color 0.3s;
+    }
+
+    .nav-menu ul li a:hover {
+      color: #d4af37;
+    }
+
+    /* CTA button */
+    .cta-pro {
+      display: inline-block;
+      background-color: #d4af37;
+      color: #0a0a0a;
+      padding: 14px 30px;
+      border-radius: 40px;
+      font-weight: bold;
+      text-decoration: none;
+      transition: transform 0.3s ease, background 0.3s ease;
+      margin-top: 30px;
+    }
+
+    .cta-pro:hover {
+      background-color: #f5d76e;
+      transform: scale(1.05);
+    }
+
+
+    /*=== CONTACTEZ NOUS <A>*/
+      .cta-contact-pro{
+    background-color: #f7f2ec;
+    color: #0a0a0a;
+    text-decoration: none;
+  position: relative;
+  top: -5px;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 50px;
+    cursor: pointer;
+    
+    transition: transform 0.3s, background-color 0.3s;
+}
+
+.cta-contact-pro:hover {
+    transform: translateY(-5px);
+    background-color: rgba(212, 175, 55, 0.874);
+    color: black;
+}
+
+    /* Pack section */
+    .pack-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 25px;
+      margin: 50px 10%;
+    }
+
+    .service-box-pro {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 15px;
+      padding: 30px;
+      flex: 1 1 300px;
+      box-shadow: 0 0 25px rgba(212,175,55,0.08);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .service-box-pro:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 0 35px rgba(212,175,55,0.2);
+    }
+
+    .service-box-pro h3 {
+      color: #d4af37;
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+    }
+
+    .service-box-pro ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .service-box-pro ul li {
+      padding-left: 20px;
+      position: relative;
+      margin-bottom: 6px;
+      opacity: 0.9;
+    }
+
+    .service-box-pro ul li::before {
+      content: "✔";
+      position: absolute;
+      left: 0;
+      color: #d4af37;
+    }
+
+    /* Pricing */
+    .pricing-section {
+      text-align: center;
+      top: 0;
+      position: relative;
+      margin: 50px auto;
+      padding: 40px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 15px;
+      width: 70%;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .pricing-section h2 {
+      color: #d4af37;
+      font-size: 1.8rem;
+    }
+
+    .pricing-section .old-price {
+      text-decoration: line-through;
+      color: #aaa;
+      font-size: 1.1rem;
+    }
+
+    .pricing-section .new-price {
+      font-size: 2rem;
+      color: #d4af37;
+      margin-top: 10px;
+      display: block;
+      font-weight: 700;
+    }
+
+    /* Promo / marketing box */
+    .promo-pro-box {
+      text-align: center;
+      margin: 60px 15%;
+      padding: 50px;
+      background: linear-gradient(135deg, rgba(212,175,55,0.15), rgba(255,255,255,0.05));
+      border-radius: 15px;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .promo-pro-box h3 {
+      color: #d4af37;
+      font-size: 1.6rem;
+      margin-bottom: 15px;
+    }
+
+    .promo-pro-box p {
+      opacity: 0.9;
+      line-height: 1.6;
+    }
+
+    .starter-pack-links {
+    background-color: #0a0a0a;
+    text-align: center;
+    padding: 60px 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    animation: fadeInUp 1s ease forwards;
+}
+
+.starter-pack-links h2 {
+    font-size: 28px;
+    color: #f7f2ec;
+    margin-bottom: 30px;
+    text-shadow: 0 0 15px rgba(159, 211, 241, 0.3);
+    letter-spacing: 1px;
+}
+
+.starter-links-container {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.starter-link-btn {
+    display: inline-block;
+    padding: 14px 28px;
+    border-radius: 50px;
+    background-color: #0a0a0a;
+    color: rgba(255, 255, 255, 0.9);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    font-size: 18px;
+    text-decoration: none;
+    transition: all 0.4s ease;
+    box-shadow: 0 0 12px rgba(159, 211, 241, 0.2);
+}
+
+.starter-link-btn:hover {
+    background-color: #f7f2ec;
+    color: #0a0a0a;
+    transform: translateY(-3px);
+    box-shadow: 0 0 20px rgba(159, 211, 241, 0.6);
+}
+
+    /* Footer */
+    .footer-pro {
+      text-align: center;
+      padding: 30px 0;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      opacity: 0.7;
+      position: relative;
+      top: 0;
+    }
+
+    /* Animations */
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+
+<body class="body-pro-pack">
+
+  <!-- BURGER MENU -->
+  <nav class="burger-menu-starter">
+        <div class="burger-logo">
+            <img src="logo.png" alt="Logo Starter Pack">
+        </div>
+        <ul class="nav-items-starter">
+            <li><a href="index.html">Accueil</a></li>
+            <li class="nav-item-submenu">Nos services
+                <ul class="submenu-starter">
+                    <li>Site Web
+                        <ul class="submenu-detail">
+                            <li><a href="offre-principal.html">Principal</a></li>
+                            <li><a href="offre-secondaire.html">Secondaire</a></li>
+                            <li><a href="offre-pro.html">Professionnelle</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="reseaux-sociaux.html">Réseaux sociaux</a></li>
+                </ul>
+            </li>
+            <li class="nav-item-submenu">Nos compétences
+                <ul class="submenu-starter">
+                    <li>À propos de nous</li>
+                    <li>Nos réalisations</li>
+                </ul>
+            </li>
+        </ul>
+        <a class="cta-contact-pro" href="contact.html">Contactez nous</a>
+    </nav>
+
+  <!-- HERO -->
+  <section class="hero-pro-pack">
+    <h1>Pro Pack</h1>
+    <p>Une offre complète, clé en main et haut de gamme pour les entreprises ambitieuses.</p>
+    <a href="devis.html" class="cta-pro">Obtenir un devis</a>
+  </section>
+
+  <!-- SERVICE BOXES -->
+  <section class="pack-container">
+    <div class="service-box-pro">
+      <h3>🌐 Site vitrine ou e-commerce</h3>
+      <ul>
+        <li>Site complet multi-pages ou boutique en ligne</li>
+        <li>Paiement sécurisé intégré (Stripe, PayPal...)</li>
+        <li>SEO optimisé et rapide</li>
+        <li>Design moderne et responsive</li>
+        <li>Maintenance et support premium 1 an</li>
+      </ul>
+      <p><strong>À partir de 690,99 €</strong></p>
+    </div>
+
+    <div class="service-box-pro">
+      <h3>🎨 Création de logo professionnel</h3>
+      <ul>
+        <li>Logo sur mesure et 100% original</li>
+        <li>Révisions illimitées jusqu’à satisfaction totale</li>
+        <li>Déclinaisons pour réseaux sociaux</li>
+        <li>Livraison en formats HD (SVG, PNG, PDF)</li>
+      </ul>
+      <p><strong>19,99 €</strong></p>
+    </div>
+
+    <div class="service-box-pro">
+      <h3>📱 Mise en place des réseaux sociaux</h3>
+      <ul>
+        <li>Création et configuration de vos comptes</li>
+        <li>Story à la une, biographie et visuels de profil</li>
+        <li>Exemple de post inclus</li>
+        <li>Optimisation visuelle cohérente à votre marque</li>
+      </ul>
+      <p><strong>49,99 €</strong></p>
+    </div>
+
+    <div class="service-box-pro">
+      <h3>📆 Gestion du contenu (2 mois)</h3>
+      <ul>
+        <li>Création et publication de contenu premium</li>
+        <li>Calendrier éditorial personnalisé</li>
+        <li>Analyse des performances</li>
+        <li>Interactions et gestion communautaire</li>
+      </ul>
+      <p><strong>280 €</strong></p>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section class="pricing-section">
+    <h2>Prix du pack complet</h2>
+    <p class="old-price">Prix si acheté séparément : 1 040,97 €</p>
+    <span class="new-price">849,99 €</span>
+    <a href="devis.html" class="cta-pro">Choisir le Pro Pack</a>
+  </section>
+
+  <!-- MARKETING BOX -->
+  <div class="promo-pro-box">
+    <h3>Pourquoi choisir le Pro Pack ?</h3>
+    <p>
+      Ce pack s’adresse aux entreprises qui veulent une solution **complète, clé en main et performante**.  
+      Vous profitez d’une **économie de près de 200 €**, d’un **gain de temps énorme**, et d’une **image de marque soignée et homogène** sur tous vos canaux digitaux.  
+      Tout est pris en charge par nos experts : **vous n’avez plus rien à gérer**.
+    </p>
+  </div>
+
+  <section class="starter-pack-links">
+    <h2>Découvrez aussi nos autres offres</h2>
+    <div class="starter-links-container">
+        <a href="starter-pack.html" class="starter-link-btn">Découvrir le Starter Pack</a>
+        <a href="package-business.html" class="starter-link-btn">Découvrir le business Pack</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer-pro">
+    <p>© 2024 Agence Freelance — Tous droits réservés.</p>
+  </footer>
+
+   <div id="mouse-tracker"></div>
+
+  <!-- JAVASCRIPT -->
+  <script>
+    // const burger = document.getElementById('burger-menu');
+    // const navMenu = document.getElementById('nav-menu');
+    // burger.addEventListener('click', () => navMenu.classList.toggle('active'));
+
+    const tracker = document.getElementById('mouse-tracker');
+    document.addEventListener('mousemove', (e) => {
+        tracker.style.left = e.clientX + 'px';
+        tracker.style.top = e.clientY + 'px';
+    });
+  </script>
+</body>
+</html>

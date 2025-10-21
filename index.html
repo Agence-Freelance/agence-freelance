@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Page d'accueil test</title>
+        <link rel="icon" href="logo.png">
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=arrow_downward" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=star" />
+
+        <style>
+        /* CURSOR TRAIL */
+        canvas.cursor-trail {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 1000;
+        pointer-events: none;
+        }
+        body {
+        margin: 0;
+        overflow-x: hidden;
+        }
+        </style>
+    </head>
+    
+
+    <body>
+
+        <video id="myVideo" muted playsinline style="width:100%; height:100vh; object-fit:cover; position:fixed; top:0; left:0; z-index:10;">
+  <source src="cadeau-animation.mp4" type="video/mp4">
+</video>
+
+<script>
+const video = document.getElementById("myVideo");
+
+video.pause();
+
+video.addEventListener("loadedmetadata", () => {
+  const duration = video.duration;
+  const virtualScrollLength = window.innerHeight * 5; // longueur virtuelle pour contrôler la vitesse de scroll
+  
+  // Crée une section "container" pour le scroll virtuel
+  const scrollContainer = document.createElement('div');
+  scrollContainer.style.height = virtualScrollLength + "px";
+  document.body.insertBefore(scrollContainer, document.body.firstChild);
+
+  let animationEnded = false;
+
+  function updateVideo() {
+    if (animationEnded) return;
+
+    const scrollTop = window.scrollY;
+    const scrollFraction = scrollTop / (virtualScrollLength - window.innerHeight);
+    const targetTime = duration * scrollFraction;
+
+    video.currentTime = targetTime;
+
+    // Quand la vidéo atteint la fin, on "libère" le scroll naturel
+    if (scrollFraction >= 1) {
+      animationEnded = true;
+      video.style.position = "relative";
+      video.style.height = "auto";
+      video.style.zIndex = "0";
+      window.scrollTo(0, 0); // remet en haut du contenu
+      scrollContainer.remove(); // supprime la zone virtuelle
+    } else {
+      requestAnimationFrame(updateVideo);
+    }
+  }
+
+  requestAnimationFrame(updateVideo);
+});
+</script>
+        
+       <header class="header-index">
+        <!-- Barre de navigation -->
+        <div class="nav-wrapper">
+
+            <!-- Barres décoratives à gauche -->
+            <div class="decor-left">
+                <div class="decor-line decor-line-1"></div>
+                <div class="decor-line decor-line-2"></div>
+                <div class="decor-line decor-line-3"></div>
+            </div>
+
+            <!-- Menu principal -->
+            <ul class="nav-menu">
+                <li class="nav-menu-item">Nos services 
+                    <span class="nav-menu-arrow">↑</span>
+                    <div class="submenu-container">
+                        <div class="submenu-item">
+                            <span class="submenu-title">Site web</span>
+                            <span class="submenu-caret">›</span>
+                            <div class="nested-submenu">
+                                <a class="submenu-link" href="offre-principal.html">Principal</a>
+                                <a class="submenu-link" href="offre-secondaire.html">Secondaire</a>
+                                <a class="submenu-link" href="offre-pro.html">Professionnel</a>
+                            </div>
+                        </div>
+                        <div class="submenu-item">
+                            <span class="submenu-title">Packaging</span>
+                            <span class="submenu-caret">›</span>
+                            <div class="nested-submenu">
+                                <a class="submenu-link" href="starter-pack.html">Starter Pack</a>
+                                <a class="submenu-link" href="package-business.html">Business Pack</a>
+                                <a class="submenu-link" href="#">Pro Pack</a>
+                            </div>
+                        </div>
+                        <div class="submenu-item">
+                            <a class="submenu-title" href="reseaux-sociaux.html">Réseaux sociaux</a>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="nav-menu-item">Nos compétences 
+                    <span class="nav-menu-arrow">↑</span>
+                    <div class="submenu-container">
+                        <a class="submenu-link" href="abouts_us.html">About us</a><br>
+                        <a class="submenu-link" href="">Nos réalisations</a>
+                    </div>
+                </li>
+            </ul>
+
+            <!-- Bouton contact -->
+            <div class="contact-button-container">
+                <a class="contact-button-link" href="contact.html">Nous contacter</a>
+            </div>
+
+            <!-- Logo -->
+            <img src="logo.png" alt="logo" class="nav-logo">
+          </div>
+
+            <a href="#" id="openBtn">
+                <div class="burger-menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>  
+            </a>  
+
+            <div class="Sidebar" id="Mysidebar">
+                <a id="Close-Btn" href="#" class="close">x</a>
+                <ul>
+                    <li><a href="#">Nos services</a></li>
+                    <li><a href="#">Nos compétences</a></li>
+                    <li><a href="#">Nous contacter</a></li>
+                </ul>
+            </div>
+
+        </header>
+
+        <script>
+/* Remplacer tout script précédent par celui-ci */
+(function() {
+  const nav = document.querySelector('.nav-wrapper');
+  if (!nav) return; // si la classe n'existe pas, on quitte proprement
+
+  const HIDE_THRESHOLD = 1200; // hauteur à dépasser avant d'activer le comportement
+  let lastScrollY = window.pageYOffset || document.documentElement.scrollTop || 0;
+
+  window.addEventListener('scroll', () => {
+    const currentScroll = window.pageYOffset || document.documentElement.scrollTop || 0;
+
+    // Tant que l'utilisateur n'a pas dépassé le seuil, on garde la nav visible
+    if (currentScroll < HIDE_THRESHOLD) {
+      nav.classList.remove('nav-hidden');
+      lastScrollY = currentScroll;
+      return;
+    }
+
+    // Si on descend (scroll vers le bas) -> cacher la nav
+    if (currentScroll > lastScrollY) {
+      nav.classList.add('nav-hidden');
+    } 
+    // Si on remonte -> afficher la nav
+    else {
+      nav.classList.remove('nav-hidden');
+    }
+
+    lastScrollY = currentScroll;
+  }, { passive: true });
+})();
+</script>
+
+
+    <!-- TEST TES TEST.         TEST TES TES.       TES TES TES TEST.          CURSOR CURSOR -->
+
+
+        
+        <canvas id="liquidCanvas"></canvas>
+
+        <div class="overlay" onclick="closeSidebar()"></div>
+
+        <div class = "container">
+            <h1> <span>AGENCE </span><span> DE </span><br>
+                <span> CONSEIL </span><span></span><br>
+                <span> DIGITAL</span></h1>
+         </div>
+
+        <div class = "btns">
+            <a class = "btn-first b1" href="abouts_us.html">En savoir plus</a>
+            <a class="btn-first b2" href="contact.html">Contactez-nous</a>
+         </div>
+
+         
+
+       
+
+        <div class="container-contacts">
+            <ul class = "medias">
+                <li class="bubble"><img src="facebook.svg" alt="fb" class = "logo-medias"></li>
+                <li class="bubble"><img src="youtube.svg" alt="yt" class = "logo-medias"></li>
+                <li class="bubble"><a href="https://www.instagram.com/agence_freelance/"><img src="instagram.svg" alt="inst" class = "logo-medias"></a></li>
+
+
+            </ul>
+        </div>
+
+<!-- Dans ton body, juste après ton code HTML -->
+
+
+ 
+
+            <!-- TEST nouveau design offre -->
+    <h1 class="title-offre">Voici nos offres toutes prêtes !</h1>
+<section class="pricing-section">
+  <div class="pricing-container">
+    
+
+    <div class="box-esthetique"></div>
+
+    
+    <!-- Offre One Page -->
+    <div class="cards onepage-offer">
+  <h2>One Page</h2>
+  <p class="subtitle">Idéal pour lancer votre présence en ligne rapidement</p>
+  <ul class="features">
+    <li>✅ Jusqu’à 5 sections personnalisées</li>
+    <li>✅ Design responsive</li>
+    <li>✅ Formulaire de contact intégré</li>
+    <li>✅ SEO de base</li>
+    <li>✅ Mise en ligne rapide</li>
+  </ul>
+  <div class="price">À partir de <span>99,99 €</span></div>
+<a class="cta" href="offre-principal.html">Consultez l'offre</a>
+</div>
+
+
+    <!-- Offre Multi Page -->
+    <div class="cards multipage-offer">
+      <h2>Multi Pages</h2>
+      <p class="subtitle">Idéal pour lancer votre présence en ligne rapidement</p>
+      <ul class="features">
+        <li>✅ Jusqu’à 5 sections personnalisées</li>
+        <li>✅ Design responsive</li>
+        <li>✅ Formulaire de contact intégré</li>
+        <li>✅ SEO de base</li>
+        <li>✅ Mise en ligne rapide</li>
+      </ul>
+      <div class="price">À partir de <span>199,99 €</span></div>
+      <a class="cta" href="offre-principal.html">Consultez l'offre</a>
+    </div>
+
+    <!-- Offre Secondaire -->
+    <div class="cards secondary-offer">
+      <h2>Secondaire</h2>
+      <p class="subtitle">Plus de fonctionnalités pour vos besoins avancés</p>
+      <ul class="features">
+        <li>✅ Jusqu’à 5 pages incluses</li>
+        <li>✅ Design responsive & mobile-friendly</li>
+        <li>✅ Formulaire de contact + newsletter</li>
+        <li>✅ Portfolio / galerie intégrée</li>
+        <li>✅ Liens externes illimités</li>
+        <li>✅ SEO de base & chargement rapide</li>
+      </ul>
+      <div class="price">À partir de <span>390,99 €</span></div>
+      <a class="cta" href="offre-secondaire.html">Consultez l'offre</a>
+    </div>
+
+    <!-- Offre Professionnelle -->
+    <div class="cards professional-offer">
+      <h2>Professionnelle</h2>
+      <p class="subtitle">Solution complète pour entreprises</p>
+      <ul class="features">
+        <li>✅ Multi-pages : 5 incluses + supplémentaires possibles</li>
+        <li>✅ Design responsive, rapide et optimisé</li>
+        <li>✅ Formulaire + newsletter intégrés</li>
+        <li>✅ Portfolio / galerie illimitée</li>
+        <li>✅ Footer complet + nom de domaine inclus</li>
+        <li>✅ SEO de base</li>
+        <li>✅ Site prêt à l’usage dès la livraison</li>
+      </ul>
+      <div class="price">À partir de <span>690,99 €</span></div>
+        <a class="cta" href="offre-pro.html">Consultez l'offre</a>
+    </div>
+
+  </div>
+</section>
+
+
+
+        <!-- Les packagings -> -->
+        <div class="box-packaging">
+        <img  id="img_package" src="img test package.jpg" alt="photo fond package">
+            <h2 class="title-packaging">Nos offres adaptés à vos besoins</h3>
+
+            <div class="packaging-starter">
+                <h3 class="title-packaging-starter">Starter Pack</h3>
+                <div class="subtitle-bar3"></div>
+                <p class="txt-packaging"><span class="material-symbols-outlined">star</span> <span>Site vitrine One page</span><br>
+                <span class="material-symbols-outlined">star</span> <span>Création d'un logo personnalisé</span><br>
+                <span class="material-symbols-outlined">star</span> <span>Mises en place de vos réseaux sociaux</span><br>
+                <span class="material-symbols-outlined">star</span> <span>2 contenus offert</span><br></p>
+
+                <p class="description-starter-pack">Lancez votre présence digitale avec notre Starter Pack : un site vitrine One Page moderne et responsive, 
+                    accompagné d’un logo personnalisé, de vos comptes réseaux sociaux configurés, et de 2 posts prêts à publier, 
+                    pour démarquer immédiatement votre entreprise en ligne.</p>
+
+                    <div class="marketing-message">🚀 Offre à ne pas manquer</div>
+
+                <button class = "btn-packaging" onclick="window.location.href='starter-pack.html'">découvrir notre offre</button>
+                
+            </div>
+
+            <div class="packaging-business">
+                <h3 class="title-packaging-starter">Business Pack</h3>
+                <div class="subtitle-bar2"></div>
+                <p class="txt-packaging"><span class="material-symbols-outlined">star</span> <span>Site vitrine multi-pages avec formulaire de contact</span><br>
+                <span class="material-symbols-outlined">star</span> <span>Création d'un logo personnalisé</span><br>
+                <span class="material-symbols-outlined">star</span> <span>Mise en place réseaux sociaux + 2 posts de lancement</span><br>
+                <span class="material-symbols-outlined">star</span> <span>Gestion contenu réseaux sociaux 1 mois</span><br></p>
+
+                <p class="description-starter-pack">Boostez votre visibilité avec notre Business Pack : un site vitrine multi-pages complet avec formulaire de contact, 
+                    accompagné d’un logo personnalisé, de vos comptes réseaux sociaux configurés + 2 posts de lancement, et de 1 mois de 
+                    gestion de contenu pour dynamiser votre communication et attirer vos premiers clients.</p>
+
+                    <div class="marketing-message">💼 Boostez votre visibilité</div>
+
+                <button class="btn-packaging" onclick="window.location.href='package-business.html'">découvrir notre offre</button>
+            </div>
+
+            <div class="packaging-pro">
+                <h3 class="title-packaging-starter">Pro Pack</h3>
+                <div class="subtitle-bar"></div>
+                <p class="txt-packaging"><span class="material-symbols-outlined">star</span> <span>Site vitrine ou e-commerce avec paiement sécurisé</span><br>
+                <span class="material-symbols-outlined">star</span> <span>Création d'un logo personnalisé</span><br>
+                <span class="material-symbols-outlined">star</span> <span>Mise en place réseaux sociaux</span><br>
+                <span class="material-symbols-outlined">star</span> <span>Gestion contenu réseaux sociaux 2 mois</span><br></p>
+
+                <p class="description-starter-pack">Propulsez votre entreprise avec notre Pro Pack : un site vitrine ou e-commerce complet avec paiement sécurisé, 
+                    accompagné d’un logo personnalisé, de vos comptes réseaux sociaux configurés, et de 2 mois de gestion de contenu, 
+                    pour offrir à votre marque une présence en ligne professionnelle, dynamique et performante.</p>
+
+                    <div class="marketing-message">🌟 Passez au niveau supérieur</div>
+
+                <button class="btn-packaging" onclick="window.location.href='package-pro.html'">découvrir notre offre</button>
+            </div>
+        </div>
+
+        <!-- PAGE POURQUOI NOUS FAIRE CONFIANCE  -->
+
+        <div class="box-rapp-id">
+            <img id="img-rapp-id" src="image rappel id .jpg" alt="rappel ID image">
+            <div class="menu-rapp-id">
+                <span class="fleche">←</span>
+            </div>
+            <div class="ligne1"></div>
+            <h2 class="title-rapp-id">Rappel sur notre identité</h2>
+            <div class="ligne-under-title"></div>
+            <p class="txt-rapp-id">Nous sommes une micro-entreprise passionnée par le développement web, avec une mission claire :<br>
+                 rendre la création de sites internet professionnels accessible à toutes les petites structures. Contrairement <br>
+                 aux grandes agences aux tarifs souvent inabordables, nous avons choisi de nous dédier aux PME, <br>
+                 indépendants et start-up, afin de leur offrir des solutions de qualité à des prix justes et transparents.<br>
+                Notre priorité est de construire une véritable relation de confiance avec nos clients. Nous prenons le <br>
+                temps d’écouter leurs besoins, de comprendre leurs objectifs et de traduire leurs idées en un site moderne,<br>
+                 efficace et parfaitement adapté à leur activité. Chaque projet est conçu comme un accompagnement <br>
+                 personnalisé, où le dialogue est au cœur du processus.
+                En choisissant notre agence, vous n’obtenez pas <br>
+                seulement un site internet : vous bénéficiez d’un partenaire attentif, engagé et disponible, prêt à vous <br>
+                aider à poser les bases solides de votre présence en ligne et à donner à votre entreprise l’élan <br>
+                qu’elle mérite.</p>
+        </div>
+
+       
+        <div class="pk-nous-choisir">
+            <div class="menu-hidden">
+                <span class="arrow">➔</span>
+            </div>
+            <img id="img-pk-nous-choisir" src="img pourquoi nous choisir.jpg" alt="Image pourquoi nous chosir">
+            <div class="ligne2"></div>
+            <h2 class="title-pk-nous-choisir">Pourquoi nous chosir ?</h2>
+            <div class="ligne2-under-title"></div>
+            <p class="txt-pk-nous-choisir">Parce que nous croyons que chaque entreprise, quelle que soit sa taille, mérite une présence en ligne <br>
+                professionnelle, moderne et efficace. Trop souvent, les petites entreprises et les start-up hésitent à <br>
+                franchir le pas du digital par crainte de coûts élevés, de processus compliqués ou de délais interminables. <br>
+                Notre mission est justement de briser ces barrières.
+                En tant qu’agence de freelance spécialisée dans <br>
+                l’accompagnement des TPE, PME et jeunes entrepreneurs, nous vous proposons des solutions claires,<br>
+                 transparentes et surtout adaptées à vos besoins réels. Pas de devis interminables, pas de tarifs flous, <br>
+                 mais des formules accessibles qui vous permettent d’investir intelligemment dans votre visibilité. <br>
+                Nous mettons un point d’honneur à travailler main dans la main avec nos clients. Pour nous, créer un <br>
+                site internet ne se limite pas à livrer un produit fini : c’est avant tout comprendre votre vision, vos <br>
+                valeurs et vos objectifs. Chaque projet démarre par une écoute attentive et un échange approfondi afin <br>
+                de construire un site qui vous ressemble vraiment — un site qui reflète l’identité de votre marque et <br>
+                qui parle directement à vos clients.</p>
+        </div>
+
+
+        <!-- PAGE PORTFOLIO          PAGE PORTFOLIO.                PAGE PORTFOLIO -->
+        
+        <h1 class="title-portfolio">↓  Consultez notre portfolio  ↓</h1>
+
+        <main>
+  <ul class='slider'>
+    <li class='item' style="background-image: url('img\ porfolio\ 1.png')">
+      <div class='content'>
+        <h2 class='title'>progress.co</h2>
+        <p class='description'>Dans le cadre du Community management pour Progress.co, nous avons publié régulièrement 
+            le contenu fourni sur TikTok afin d’optimiser la visibilité du projet. Nous avons également produit des rapports 
+            hebdomadaires détaillés pour analyser les performances et ajuster la stratégie digitale.
+        </p>
+        <button>Read More</button>
+      </div>
+    </li>
+    <li class='item' style="background-image: url('img\ portfolio4.jpg')">
+      <div class='content'>
+        <h2 class='title'>moonhealingexperiences</h2>
+        <p class='description'>Dans le cadre du Community management pour Moon Healing Experiences, nous avons géré le 
+            compte Instagram en créant et publiant du contenu régulier pour promouvoir ses cours de yoga en ligne. Nous 
+            avons également développé un système de réservation en ligne via Calendly, facilitant la prise de rendez-vous pour ses clients.</p>
+        <button>Read More</button>
+      </div>
+    </li>
+   
+    </li>
+    <li class='item' style="background-image: url('img\ portfolio\ 5.jpg')">
+      <div class='content'>
+        <h2 class='title'>luflaix</h2>
+        <p class='description'>
+          Dans le cadre du Community management pour Luflaix, nous avons créé et publié des vidéos courtes et photos sur TikTok 
+          afin de promouvoir efficacement leur nouvelle montre. Nous avons mis en œuvre notre expertise en contenu digital pour maximiser 
+          l’engagement et la visibilité de la marque auprès de sa communauté.
+        </p>
+        
+        
+        <button>Read More</button>
+      </div>
+    </li>
+     
+  </ul>
+  <nav class='nav'>
+    <ion-icon class='btn prev' name="arrow-back-outline"></ion-icon>
+    <ion-icon class='btn next' name="arrow-forward-outline"></ion-icon>
+  </nav>
+</main>
+
+<section id="social-media" class="social-media-section">
+
+    <div class="background-animation"></div>
+
+  <h2 class="section-title">Nos Services Réseaux Sociaux</h2>
+  <p class="section-subtitle">
+    Développez votre présence en ligne grâce à des stratégies modernes et percutantes.
+  </p>
+
+  <div class="social-cards">
+    <!-- Setup réseaux sociaux -->
+    <div class="social-card">
+      <h3>Setup Réseaux Sociaux</h3>
+      <p>
+        Création complète du compte du réseau social souhaité avec intégration gratuite d’un logo sur mesure, 
+        description professionnelle, paramétrage personnalisé et création de stories à la une. 
+        Harmonisation des couleurs pour une identité visuelle cohérente.
+      </p>
+      <a class="cta-btn" href="reseaux-sociaux.html">Découvrir l'offre</a>
+    </div>
+<span class="badge">⭐ Très demandée</span>
+    <!-- Création de contenu standard -->
+    <div class="social-card highlight">
+  <h3>Création de Contenu – 4 Semaines</h3>
+  <p>
+    Conception de visuels et vidéos sur 4 semaines. 
+    Jusqu’à <strong>4 publications</strong> par semaine selon vos besoins (photo, visuel, citation, vidéo...). 
+    Analyse des performances et ajustement si nécessaire.
+  </p>
+  <a class="cta-btn" href="reseaux-sociaux.html">Découvrir l'offre</a>
+</div>
+
+    <!-- Création de contenu premium -->
+    <div class="social-card">
+      <h3>Création de Contenu Premium – 4 Semaines</h3>
+      <p>
+        Création quotidienne de visuels et vidéos pendant 4 semaines. 
+        Publication <strong>chaque jour</strong> pour maximiser votre visibilité. 
+        Analyse hebdomadaire des performances et ajustement stratégique.
+      </p>
+      <a class="cta-btn" href="reseaux-sociaux.html">Découvrir l'offre</a>
+    </div>
+  </div>
+</section>
+
+
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+        
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>À propos</h3>
+                <p>Découvrez notre mission et notre engagement à fournir des services de qualité.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <p>Email: agence_freelance@yahoo.com</p>
+                <p>Téléphone: +33 1 23 45 67 89</p>
+            </div>
+            <div class="footer-section">
+                <h3>Suivez-nous</h3>
+                <a href="#">Facebook</a> | 
+                <a href="#">Instagram</a> | 
+                <a href="#">LinkedIn</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Exemple. <a href="conditions_utilisations.html">Tous droits réservés.</a></p>
+        </div>
+
+        <!-- Put this code anywhere in the body of your page where you want the badge to show up. -->
+
+        <div itemscope itemtype='http://schema.org/Person' class='fiverr-seller-widget' style='display: inline-block;'>
+            <a itemprop='url' href=https://www.fiverr.com/antoine_gabriel rel="nofollow" target="_blank" style='display: inline-block;'>
+            <div class='fiverr-seller-content' id='fiverr-seller-widget-content-8cc4f058-45c5-4968-bc6d-2c622e08a43a' itemprop='contentURL' style='display: none;'></div>
+            <div id='fiverr-widget-seller-data' style='display: none;'>
+                <div itemprop='name' >antoine_gabriel</div>
+                <div itemscope itemtype='http://schema.org/Organization'><span itemprop='name'>Fiverr</span></div>
+                <div itemprop='jobtitle'>Seller</div>
+                <div itemprop='description'>Bonjour, je suis étudiant dans dans le domaine de l'informatique. Au cours de mon apprentissage j'ai pu acquérir de nombreuses notions de développement mais je suis aussi en mesure de vous aider dans votre communication par le biais des réseaux sociaux ( exemple : Instagram, Facebook, TikTok, YouTube, Twitter...)</div>
+            </div>
+        </a>
+        </div>
+        
+
+        <script id='fiverr-seller-widget-script-8cc4f058-45c5-4968-bc6d-2c622e08a43a' src='https://widgets.fiverr.com/api/v1/seller/antoine_gabriel?widget_id=8cc4f058-45c5-4968-bc6d-2c622e08a43a' data-config='{"category_name":"Digital Marketing"}' async='true' defer='true'></script>
+
+    </footer>
+
+        <script src="https://unpkg.com/ag-grid-community/dist/ag-grid-community.min.nostyle.js"></script>
+        <script src="app.js"></script>
+            <script src="server.js"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r152/three.min.js"></script>
+    <script src="liquidEther.js"></script>
+
+    </body>
+
+    
+</html>
+
