@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <title>Page d'accueil test</title>
         <link rel="icon" href="logo.png">
-        <link rel="stylesheet" href="style.css">
+        
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,6 +13,8 @@
         <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700&display=swap" rel="stylesheet">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+        <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
         <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
@@ -20,18 +22,1069 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=star" />
 
         <style>
-        /* CURSOR TRAIL */
-        canvas.cursor-trail {
-        position: fixed;
-        top: 0;
-        left: 0;
-        z-index: 1000;
-        pointer-events: none;
-        }
-        body {
-        margin: 0;
-        overflow-x: hidden;
-        }
+       /* ============================
+   THEME VARIABLES - Premium
+   Matte gold, deep black, subtle color accents
+   ============================ */
+:root{
+  --bg-900: #060507;            /* presque noir profond */
+  --bg-800: #0b0b0c;
+  --matte-gold-1: #C9B037;     /* doré doux */
+  --matte-gold-2: #8A795D;     /* doré mat plus sombre */
+  --glass: rgba(255,255,255,0.03);
+
+  --accent-aqua: #7fd6d9;      /* bleu eau léger */
+  --accent-violet: #a88ff8;    /* violet léger */
+  --accent-red-aqua: #ff6b6b;  /* "rouge eau" - un corail doux */
+  --accent-red-business: #e04e4e;
+  --accent-gold: var(--matte-gold-1);
+
+  --text-1: #f3f3f3;
+  --muted: #bdbdbd;
+  --glass-border: rgba(255,255,255,0.04);
+  --radius: 14px;
+  --transition: 450ms cubic-bezier(.22,.9,.32,1);
+}
+
+/* Reset léger (ne pas toucher footer global qui a ses propres styles) */
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family: "Montserrat", "Raleway", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  color:var(--text-1);
+  background: linear-gradient(180deg, var(--bg-900) 0%, #070708 100%);
+  overflow-x:hidden;
+  line-height:1.45;
+}
+
+/* ---------------------------
+   NAVIGATION / HEADER
+   --------------------------- */
+.header-index{
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  z-index:80;
+  pointer-events:auto;
+  display:block;
+  width:100%;
+  transition:background var(--transition), transform var(--transition), box-shadow var(--transition);
+  will-change: transform, background;
+}
+
+.nav-wrapper{
+  max-width:1220px;
+  margin:0 auto;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:20px 28px;
+  gap:18px;
+  transform:translateZ(0);
+  background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.15) 100%);
+  border-bottom: 1px solid transparent;
+  border-radius:0;
+}
+
+/* when scrolled / sticky state */
+.header-index.scrolled .nav-wrapper{
+  background: linear-gradient(180deg, rgba(5,4,4,0.85), rgba(10,9,9,0.82));
+  box-shadow: 0 6px 30px rgba(0,0,0,0.6), 0 1px 0 rgba(255,255,255,0.02) inset;
+  border-bottom:1px solid rgba(255,255,255,0.02);
+  backdrop-filter: blur(5px);
+}
+
+/* Hide nav when scrolling down */
+.nav-hidden{
+  transform: translateY(-110%) !important;
+  opacity:0;
+}
+
+/* logo */
+.nav-logo{
+  height:44px;
+  width:auto;
+  object-fit:contain;
+  transition: transform var(--transition);
+  z-index:85;
+}
+
+/* decorative left lines */
+.decor-left{display:flex; gap:8px; align-items:center}
+.decor-line{width:3px; height:34px; border-radius:2px; background:linear-gradient(180deg,var(--matte-gold-2), rgba(255,255,255,0.03)); opacity:0.9}
+.decor-line-2{height:28px; opacity:0.65}
+.decor-line-3{height:20px; opacity:0.5}
+
+/* nav menu */
+.nav-menu{
+  list-style:none;
+  display:flex;
+  gap:18px;
+  align-items:center;
+  margin:0;
+  padding:0;
+}
+.nav-menu-item{
+  position:relative;
+  font-weight:600;
+  letter-spacing:0.4px;
+  cursor:pointer;
+  padding:8px 12px;
+  color:var(--text-1);
+  transition:color 240ms;
+}
+.nav-menu-item:hover{color:var(--matte-gold-1)}
+
+/* arrow caret */
+.nav-menu-arrow{
+  display:inline-block;
+  margin-left:8px;
+  font-size:12px;
+  transform:translateY(-2px);
+  color:var(--muted);
+}
+
+/* submenu */
+.submenu-container{
+  position:absolute;
+  left:0;
+  top:48px;
+  min-width:260px;
+  background: linear-gradient(180deg, rgba(12,12,12,0.95), rgba(7,7,7,0.98));
+  border-radius:10px;
+  padding:14px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.7), 0 2px 0 rgba(255,255,255,0.02) inset;
+  opacity:0;
+  transform: translateY(8px) scale(.98);
+  pointer-events:none;
+  transition: opacity 260ms ease, transform 260ms ease;
+  z-index:90;
+  border:1px solid rgba(255,255,255,0.02);
+}
+.nav-menu-item:hover .submenu-container{
+  opacity:1;
+  transform: translateY(2px) scale(1);
+  pointer-events:auto;
+}
+
+/* submenu items */
+.submenu-item{display:flex; align-items:flex-start; gap:10px; padding:8px 6px}
+.submenu-title{font-weight:700; font-size:15px; color:var(--text-1)}
+.submenu-link{display:block; color:var(--muted); text-decoration:none; padding:6px 0; font-size:14px}
+.submenu-link:hover{color:var(--text-1); text-decoration:underline}
+
+/* contact button */
+.contact-button-container{margin-left:12px}
+.contact-button-link{
+  display:inline-block;
+  padding:10px 16px;
+  border-radius:10px;
+  background:linear-gradient(90deg, rgba(200,176,55,0.12), rgba(138,121,93,0.06));
+  color:var(--matte-gold-1);
+  border:1px solid rgba(200,176,55,0.12);
+  text-decoration:none;
+  font-weight:700;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+.contact-button-link:hover{
+  transform:translateY(-3px);
+  box-shadow: 0 8px 30px rgba(137,121,93,0.12), 0 2px 6px rgba(0,0,0,0.6);
+}
+
+/* burger / sidebar (mobile) */
+#openBtn{display:none}
+.burger-menu{width:44px;height:38px;display:flex;flex-direction:column;justify-content:space-between;padding:8px;cursor:pointer}
+.burger-menu span{display:block;height:3px;background:linear-gradient(90deg,var(--matte-gold-1),var(--matte-gold-2));border-radius:3px;transition:all 220ms}
+
+/* Sidebar basic behaviour (we'll control class via JS) */
+.Sidebar{
+  position:fixed;
+  right:-100%;
+  top:0;
+  bottom:0;
+  width:320px;
+  background:linear-gradient(180deg,#070707,#0b0b0b);
+  padding:36px;
+  z-index:99;
+  transition:right 420ms cubic-bezier(.22,.9,.32,1);
+  box-shadow:-40px 0 80px rgba(0,0,0,0.65);
+}
+.Sidebar.open{right:0}
+
+/* overlay used by sidebar */
+.overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.5);
+  z-index:88;
+  display:none;
+  opacity:0;
+  transition:opacity 240ms;
+}
+.overlay.active{display:block; opacity:1}
+
+/* ---------------------------
+   HERO / INTRO
+   --------------------------- */
+.container{
+  min-height:85vh; /* hero area (under the video) */
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  justify-content:center;
+  gap:18px;
+  padding:120px 28px 60px;
+  max-width:1200px;
+  margin:0 auto;
+  z-index:40;
+  position:relative;
+}
+
+/* big headline - luxury style */
+.container h1{
+  font-family: "Oswald", "Lobster", "Montserrat", sans-serif;
+  font-weight:700;
+  font-size: clamp(34px, 7vw, 84px);
+  line-height:0.95;
+  margin:0;
+  letter-spacing:1px;
+  color:linear-gradient(90deg,var(--text-1),var(--matte-gold-1));
+  display:inline-block;
+  text-shadow: 0 6px 30px rgba(0,0,0,0.6);
+}
+
+/* subtle gold accent under first word */
+.container h1 span:first-child{
+  color:var(--matte-gold-1);
+  -webkit-text-stroke: 0.3px rgba(0,0,0,0.3);
+}
+
+/* CTA buttons */
+.btns{display:flex; gap:14px; margin-top:10px}
+.btn-first{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:12px 18px;
+  border-radius:12px;
+  background:transparent;
+  border:1px solid rgba(255,255,255,0.06);
+  color:var(--text-1);
+  text-decoration:none;
+  font-weight:700;
+  backdrop-filter: blur(2px);
+  transition: transform var(--transition), box-shadow var(--transition), background var(--transition);
+}
+.btn-first.b1{box-shadow: 0 8px 30px rgba(127,214,217,0.03)}
+.btn-first.b1:hover{transform:translateY(-6px); box-shadow: 0 18px 50px rgba(127,214,217,0.06)}
+.btn-first.b2{background: linear-gradient(90deg, rgba(201,176,55,0.07), rgba(138,121,93,0.04)); color:var(--matte-gold-1)}
+.btn-first.b2:hover{transform:translateY(-6px); box-shadow: 0 18px 50px rgba(201,176,55,0.06)}
+
+/* social bubbles (left column) */
+.container-contacts{
+  position:fixed;
+  left:22px;
+  bottom:38px;
+  z-index:40;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+.medias{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px}
+.bubble{
+  width:48px;height:48px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.18));
+  display:flex;align-items:center;justify-content:center;box-shadow: 0 8px 30px rgba(0,0,0,0.55);
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+.bubble:hover{transform:translateY(-6px); box-shadow: 0 22px 60px rgba(0,0,0,0.6)}
+
+.logo-medias{width:22px;height:22px;opacity:0.95}
+
+/* ---------------------------
+   PRICING / CARDS (services)
+   --------------------------- */
+.title-offre{
+  text-align:center;
+  margin-top:36px;
+  font-size:28px;
+  font-weight:700;
+  color:var(--muted);
+  letter-spacing:1px;
+}
+
+/* container */
+.pricing-section{
+  padding:48px 28px;
+  max-width:1180px;
+  margin:0 auto;
+}
+.pricing-container{
+  display:grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap:22px;
+  align-items:start;
+}
+
+/* card base */
+.cards{
+  background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.22));
+  border:1px solid rgba(255,255,255,0.03);
+  padding:22px;
+  border-radius:16px;
+  min-height:320px;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  transition: transform 420ms cubic-bezier(.22,.9,.32,1), box-shadow 420ms;
+  will-change: transform, box-shadow;
+  overflow:hidden;
+}
+
+/* hover lift with colored box-shadow */
+.cards:hover{
+  transform: translateY(-10px) scale(1.01);
+  box-shadow: 0 30px 70px rgba(2,2,2,0.7);
+}
+
+/* Titles */
+.cards h2{margin:0;font-size:20px;letter-spacing:0.6px}
+.cards .subtitle{margin:0;color:var(--muted);font-weight:500;font-size:14px}
+.features{margin:8px 0 0 0;padding-left:18px;color:var(--muted); font-size:14px}
+.price{margin-top:auto;font-weight:800;font-size:18px}
+.price span{color:var(--matte-gold-1); font-weight:900}
+
+/* CTA inside card */
+.cards .cta{
+  display:inline-block;
+  margin-top:10px;
+  padding:10px 14px;
+  border-radius:10px;
+  text-decoration:none;
+  font-weight:700;
+  border:1px solid rgba(255,255,255,0.04);
+}
+
+/* Individual color accents (box-shadow + small banner) */
+/* One Page - bleu eau léger */
+.onepage-offer{
+  box-shadow: 0 16px 60px rgba(127,214,217,0.06), 0 1px 0 rgba(255,255,255,0.01) inset;
+  border-top: 3px solid rgba(127,214,217,0.12);
+}
+.onepage-offer h2{color:var(--accent-aqua)}
+
+/* MultiPage - violet léger */
+.multipage-offer{
+  box-shadow: 0 16px 60px rgba(168,143,248,0.06);
+  border-top:3px solid rgba(168,143,248,0.12);
+}
+.multipage-offer h2{color:var(--accent-violet)}
+
+/* Secondaire - "rouge eau" */
+.secondary-offer{
+  box-shadow: 0 16px 60px rgba(255,107,107,0.06);
+  border-top:3px solid rgba(255,107,107,0.12);
+}
+.secondary-offer h2{color:var(--accent-red-aqua)}
+
+/* Professionnel - doré */
+.professional-offer{
+  box-shadow: 0 18px 80px rgba(201,176,55,0.06);
+  border-top:3px solid rgba(201,176,55,0.12);
+  background: linear-gradient(180deg, rgba(15,12,7,0.6), rgba(8,6,3,0.45));
+}
+.professional-offer h2{color:var(--matte-gold-1)}
+
+/* make CTAs colored subtly */
+.onepage-offer .cta{background:rgba(127,214,217,0.06); color:var(--accent-aqua)}
+.multipage-offer .cta{background:rgba(168,143,248,0.06); color:var(--accent-violet)}
+.secondary-offer .cta{background:rgba(255,107,107,0.06); color:var(--accent-red-aqua)}
+.professional-offer .cta{background:linear-gradient(90deg, rgba(201,176,55,0.07), rgba(138,121,93,0.03)); color:var(--matte-gold-1)}
+
+/* ---------------------------
+   PACKAGING (starter/business/pro)
+   --------------------------- */
+.box-packaging{
+  margin:48px auto;
+  max-width:1180px;
+  display:grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap:22px;
+  padding:28px;
+}
+.box-packaging img#img_package{
+  display:none; /* kept from layout - we use cards */
+}
+
+/* starter (blue aqua) */
+.packaging-starter, .packaging-business, .packaging-pro{
+  padding:20px;
+  border-radius:14px;
+  background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.12));
+  border:1px solid rgba(255,255,255,0.02);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+}
+.packaging-starter .title-packaging-starter{color:var(--accent-aqua)}
+.packaging-business .title-packaging-starter{color:var(--accent-red-business)}
+.packaging-pro .title-packaging-starter{color:var(--matte-gold-1)}
+
+/* marketing message badge */
+.marketing-message{
+  margin-top:12px;
+  display:inline-block;
+  padding:8px 12px;
+  border-radius:10px;
+  background:linear-gradient(90deg, rgba(127,214,217,0.06), rgba(168,143,248,0.03));
+  font-weight:700;
+  color:var(--text-1);
+}
+
+/* buttons packaging */
+.btn-packaging{
+  margin-top:16px;
+  padding:10px 14px;
+  border-radius:10px;
+  border:0;
+  background: linear-gradient(90deg, rgba(201,176,55,0.08), rgba(138,121,93,0.04));
+  color:var(--matte-gold-1);
+  font-weight:800;
+  cursor:pointer;
+  transition:transform var(--transition);
+}
+.btn-packaging:hover{transform:translateY(-6px)}
+
+/* ---------------------------
+   "Pourquoi nous choisir" + "Qui sommes-nous"
+   --------------------------- */
+.pk-nous-choisir, .box-rapp-id{
+  max-width:1180px;
+  margin:48px auto;
+  padding:28px;
+  border-radius:14px;
+  background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(0,0,0,0.18));
+  border:1px solid rgba(255,255,255,0.02);
+  box-shadow: 0 18px 60px rgba(0,0,0,0.55);
+}
+.title-rapp-id, .title-pk-nous-choisir{
+  font-size:22px;
+  margin:8px 0 12px;
+  color:var(--text-1);
+}
+.txt-rapp-id, .txt-pk-nous-choisir{
+  color:var(--muted);
+  white-space:pre-line;
+}
+
+/* === HERO SECTION === */
+.hero {
+  background: radial-gradient(circle at top left, #111 0%, #000 80%);
+  padding: 8rem 5%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.hero-content {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1300px;
+  gap: 3rem;
+}
+.hero-text {
+  flex: 1 1 400px;
+}
+.hero-text h1 {
+  font-size: 3.2rem;
+  background: linear-gradient(90deg, #c9b037, #8a795d);
+  -webkit-background-clip: text;
+  color: transparent;
+  font-weight: 700;
+}
+.hero-text p {
+  color: #d1d1d1;
+  font-size: 1.1rem;
+  margin-top: 1rem;
+}
+.cta-btn {
+  display: inline-block;
+  margin-top: 2rem;
+  padding: 0.9rem 2rem;
+  background: linear-gradient(90deg, #c9b037, #8a795d);
+  color: #000;
+  border-radius: 50px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform 0.3s ease;
+}
+.cta-btn:hover {
+  transform: scale(1.05);
+}
+.hero-image img {
+  width: 400px;
+  border-radius: 20px;
+  box-shadow: 0 0 40px rgba(201, 176, 55, 0.2);
+}
+
+/* === SERVICES === */
+.services {
+  background-color: #0a0a0a;
+  padding: 6rem 5%;
+  color: white;
+  text-align: center;
+}
+.services h2 {
+  font-size: 2.4rem;
+  background: linear-gradient(90deg, #c9b037, #8a795d);
+  -webkit-background-clip: text;
+  color: transparent;
+  margin-bottom: 3rem;
+}
+.service-row {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+.card {
+  background-color: #111;
+  border-radius: 20px;
+  padding: 2rem;
+  width: 300px;
+  position: relative;
+  transition: all 0.4s ease;
+}
+.card:hover {
+  transform: translateY(-10px);
+}
+.card .badge {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: #c9b037;
+  color: #000;
+  padding: 0.3rem 0.8rem;
+  border-radius: 10px;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+.card .badge.gold {
+  background: linear-gradient(90deg, #c9b037, #8a795d);
+}
+.card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+.card p {
+  font-size: 1rem;
+  color: #ccc;
+}
+.card .price {
+  margin-top: 1.2rem;
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: #c9b037;
+}
+.card.onepage { box-shadow: 0 0 30px rgba(0, 190, 255, 0.2); }
+.card.multipage { box-shadow: 0 0 30px rgba(160, 100, 255, 0.2); }
+.card.secondaire { box-shadow: 0 0 30px rgba(255, 80, 80, 0.2); }
+.card.pro { box-shadow: 0 0 40px rgba(201, 176, 55, 0.3); margin: 3rem auto; }
+
+/* Packaging */
+.card.pack-starter { box-shadow: 0 0 30px rgba(0, 190, 255, 0.2); }
+.card.pack-business { box-shadow: 0 0 30px rgba(255, 80, 80, 0.2); }
+.card.pack-pro { box-shadow: 0 0 40px rgba(201, 176, 55, 0.3); margin: 3rem auto; }
+
+/* === WHY US === */
+.why-us {
+  padding: 6rem 5%;
+  background-color: #0f0f0f;
+  text-align: center;
+}
+.why-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+.why-card {
+  background: #111;
+  border-radius: 15px;
+  padding: 2rem;
+  width: 260px;
+  box-shadow: 0 0 25px rgba(201, 176, 55, 0.15);
+  transition: all 0.4s ease;
+}
+.why-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 0 40px rgba(201, 176, 55, 0.3);
+}
+
+/* === ABOUT === */
+.about {
+  background: radial-gradient(circle at center, #000 0%, #0a0a0a 100%);
+  padding: 6rem 5%;
+  color: white;
+}
+.about-content {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: auto;
+  gap: 2rem;
+}
+.about-text {
+  flex: 1 1 400px;
+}
+.about-text h2 {
+  font-size: 2.2rem;
+  background: linear-gradient(90deg, #c9b037, #8a795d);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+.about-img img {
+  width: 380px;
+  border-radius: 20px;
+  box-shadow: 0 0 40px rgba(201, 176, 55, 0.25);
+}
+
+
+
+/*TEST PORTFOLIO*/
+
+main {
+  position: relative;
+  top: 0px;
+  width: 100%;
+  height: 800px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+}
+
+.item {
+  width: 200px;
+  height: 300px;
+  list-style-type: none;
+  position: absolute;
+  z-index: 10;
+  top: 560px;
+  transform: translateY(-50%);
+  z-index: 1;
+  background-position: center;
+  background-size: cover;
+  border-radius: 20px;
+  box-shadow: 0 20px 30px rgba(255,255,255,0.3) inset;
+  transition: transform 0.1s, left 0.75s, top 0.75s, width 0.75s, height 0.75s;
+
+  &:nth-child(1), &:nth-child(2) {
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    transform: none;
+    border-radius: 0;
+    box-shadow: none;
+    opacity: 1;
+  }
+
+  &:nth-child(3) { left: 50%; }
+  &:nth-child(4) { left: calc(50% + 220px); }
+  &:nth-child(5) { left: calc(50% + 440px); }
+  &:nth-child(6) { left: calc(50% + 660px); opacity: 0; }
+}
+
+.content {
+  width: min(30vw,400px);
+  position: absolute;
+  top: 70%;
+  left: 60rem;
+  transform: translateY(-50%);
+  font: 400 0.85rem helvetica,sans-serif;
+  color: white;
+  background:  rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  padding: 10px;
+  text-shadow: 0 3px 8px rgba(0,0,0,0.5);
+  opacity: 0;
+  display: none;
+
+  & .title {
+    font-family: 'arial-black';
+    text-transform: uppercase;
+  }
+
+  & .description {
+    line-height: 1.7;
+    margin: 1rem 0 1.5rem;
+    font-size: 0.8rem;
+  }
+
+  & button {
+    width: fit-content;
+    background-color: rgba(0,0,0,0.1);
+    color: white;
+    border: 2px solid white;
+    border-radius: 0.25rem;
+    padding: 0.75rem;
+    cursor: pointer;
+  }
+}
+
+.item:nth-of-type(2) .content {
+  display: block;
+  animation: show 0.75s ease-in-out 0.3s forwards;
+}
+
+@keyframes show {
+  0% {
+    filter: blur(5px);
+    transform: translateY(calc(-50% + 75px));
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+
+.nav {
+  position: relative;
+  top: 92%;
+  left: 103.3%;
+  transform: translateX(-50%);
+  z-index: 50000;
+  user-select: none;
+
+  & .btn {
+    background-color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
+    border: 2px solid rgb(255, 255, 255);
+    margin: 0 0.25rem;
+    padding: 0.75rem;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.761);
+      color: black;
+      border: 2px solid black;
+      transform: scale(1.2);
+
+    }
+  }
+}
+
+/* ========== Portfolio =============*/
+
+
+/* === PORTFOLIO SECTION === */
+/* === PORTFOLIO SECTION avec fondu vers réseaux sociaux === */
+.portfolio {
+  background: linear-gradient(to bottom, #111 0%, #111 60%, #0f1724 100%);
+  padding: 6rem 5%;
+  text-align: center;
+  color: white;
+}
+.portfolio-text h2 {
+  font-size: 2.4rem;
+  background: linear-gradient(90deg, #c9b037, #8a795d);
+  -webkit-background-clip: text;
+  color: transparent;
+  position: relative;
+  top: -50px;
+}
+.portfolio-text p {
+  font-size: 1.1rem;
+  color: #ccc;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  top: -50px;
+  line-height: 1.6;
+}
+.portfolio-btn {
+  display: inline-block;
+  position: relative;
+  top:-10px;
+  padding: 0.9rem 2rem;
+  background: linear-gradient(90deg, #c9b037, #8a795d);
+  color: #000;
+  border-radius: 50px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 20px rgba(201, 176, 55, 0.2);
+}
+.portfolio-btn:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 0 35px rgba(201, 176, 55, 0.35);
+}
+
+
+/* Optionnel : animation fade-in avec GSAP */
+
+
+/* ========== Réseaux sociaux ======== */
+
+/* --- SECTION --- */
+.social-media-section {
+  background-color: #0f1724; /* bleu nuit */
+  padding: 100px 10%;
+  text-align: center;
+  position: relative;
+  top: 0px;
+}
+
+.section-title {
+  color: #ffffff;
+  font-size: 2.2rem;
+  margin-bottom: 10px;
+}
+
+.section-subtitle {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 1.1rem;
+  margin-bottom: 60px;
+}
+
+/* --- GRID --- */
+.social-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 40px;
+}
+
+/* --- CARD --- */
+.social-card {
+  background: linear-gradient(145deg, #1c273c, #0e1622);
+  border-radius: 20px;
+  padding: 35px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.social-card h3 {
+  color: #ffffff;
+  margin-bottom: 15px;
+  font-size: 1.5rem;
+}
+
+.social-card p {
+  color: #f5f1e9; /* blanc crème */
+  line-height: 1.6;
+  font-size: 0.95rem;
+  transition: transform 0.4s ease;
+}
+
+/* --- CTA BUTTON --- */
+.cta-btn {
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%) translateY(30px);
+  opacity: 0;
+  background: linear-gradient(90deg, #00c6a7, #1de9b6); /* vert eau dynamique */
+  color: #0f1724;
+  border: none;
+  border-radius: 30px;
+  padding: 12px 26px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  box-shadow: 0 0 10px rgba(0, 198, 167, 0.4);
+}
+
+/* --- HOVER EFFECTS --- */
+.social-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+  padding-top: 10px;
+}
+
+.social-card:hover p {
+  transform: scale(0.98);
+}
+
+.social-card:hover .cta-btn {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
+
+/* --- BUTTON HOVER --- */
+.cta-btn:hover {
+  background: linear-gradient(90deg, #1de9b6, #00c6a7);
+  box-shadow: 0 0 15px rgba(0, 198, 167, 0.6);
+}
+
+/* --- BADGE MARKETING --- */
+.badge {
+  position: absolute;
+  top: 5895px;
+  z-index: 1000;
+  left: 44%;
+  background: linear-gradient(90deg, #00c6a7, #1de9b6);
+  color: #0f1724;
+  font-weight: 700;
+  font-size: 0.85rem;
+  padding: 6px 14px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 0 12px rgba(0, 198, 167, 0.4);
+  transition: transform 0.3s ease;
+  
+}
+
+.highlight:hover .badge {
+  transform: scale(1.08);
+}
+
+
+/* --- BACKGROUND ANIMATION --- */
+.background-animation {
+  position: absolute;
+  bottom: -100px;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.social-media-section {
+  position: relative;
+  overflow: hidden;
+  background-color: #0f1724;
+  padding: 100px 10%;
+  text-align: center;
+  z-index: 1;
+}
+
+/* --- PARTICLES --- */
+.background-animation span {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: rgba(0, 198, 167, 0.35);
+box-shadow: 0 0 10px rgba(0, 198, 168, 0.878);
+  border-radius: 50%;
+  bottom: 0px;
+  animation: floatUp 2s linear infinite;
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.4;
+  }
+  100% {
+    transform: translateY(-110vh) scale(1.2);
+    opacity: 0;
+  }
+}
+
+
+/* ====== FOOTER ======*/
+
+footer {
+    background-color: #0f1724; /* même fond que le reste du site */
+    color: #f8f9fa; /* blanc crème doux */
+    padding: 60px 20px 20px 20px;
+    text-align: center;
+    position: relative;
+    z-index: 10;
+    top: 0px;
+}
+
+.footer-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+    
+}
+
+.footer-section {
+    flex: 1 1 250px;
+    text-align: left;
+}
+
+.footer-section h3 {
+    color: #ffffff;
+    margin-bottom: 15px;
+    font-size: 18px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.footer-section p {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.footer-section a {
+    color: #ffd700; /* doré élégant pour contraster */
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.footer-section a:hover {
+    color: #ffffff;
+}
+
+.footer-bottom {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.footer-bottom a {
+    color: #ffd700;
+    text-decoration: none;
+}
+
+.footer-bottom a:hover {
+    text-decoration: underline;
+}
+
+
+/* small decorative lines */
+.ligne1, .ligne2{height:3px; width:64px; background:linear-gradient(90deg,var(--matte-gold-1),rgba(255,255,255,0.03)); margin-bottom:12px; border-radius:6px}
+
+/* ---------------------------
+   RESPONSIVE
+   --------------------------- */
+@media (max-width:1100px){
+  .pricing-container{grid-template-columns:repeat(2,1fr)}
+  .box-packaging{grid-template-columns:1fr}
+}
+@media (max-width:720px){
+  .nav-menu{display:none}
+  #openBtn{display:block}
+  .nav-logo{height:40px}
+  .container{padding:140px 18px 40px}
+  .pricing-container{grid-template-columns:1fr}
+  .container-contacts{left:10px; bottom:10px}
+  .header-index.scrolled .nav-wrapper{padding:12px 18px}
+}
+
         </style>
     </head>
     
@@ -161,310 +1214,124 @@ video.addEventListener("loadedmetadata", () => {
 
         </header>
 
-        <script>
-/* Remplacer tout script précédent par celui-ci */
-(function() {
-  const nav = document.querySelector('.nav-wrapper');
-  if (!nav) return; // si la classe n'existe pas, on quitte proprement
-
-  const HIDE_THRESHOLD = 1200; // hauteur à dépasser avant d'activer le comportement
-  let lastScrollY = window.pageYOffset || document.documentElement.scrollTop || 0;
-
-  window.addEventListener('scroll', () => {
-    const currentScroll = window.pageYOffset || document.documentElement.scrollTop || 0;
-
-    // Tant que l'utilisateur n'a pas dépassé le seuil, on garde la nav visible
-    if (currentScroll < HIDE_THRESHOLD) {
-      nav.classList.remove('nav-hidden');
-      lastScrollY = currentScroll;
-      return;
-    }
-
-    // Si on descend (scroll vers le bas) -> cacher la nav
-    if (currentScroll > lastScrollY) {
-      nav.classList.add('nav-hidden');
-    } 
-    // Si on remonte -> afficher la nav
-    else {
-      nav.classList.remove('nav-hidden');
-    }
-
-    lastScrollY = currentScroll;
-  }, { passive: true });
-})();
-</script>
-
 
     <!-- TEST TES TEST.         TEST TES TES.       TES TES TES TEST.          CURSOR CURSOR -->
 
 
-        
-        <canvas id="liquidCanvas"></canvas>
-
-        <div class="overlay" onclick="closeSidebar()"></div>
-
-        <div class = "container">
-            <h1> <span>AGENCE </span><span> DE </span><br>
-                <span> CONSEIL </span><span></span><br>
-                <span> DIGITAL</span></h1>
-         </div>
-
-        <div class = "btns">
-            <a class = "btn-first b1" href="abouts_us.html">En savoir plus</a>
-            <a class="btn-first b2" href="contact.html">Contactez-nous</a>
-         </div>
-
-         
-
-       
-
-        <div class="container-contacts">
-            <ul class = "medias">
-                <li class="bubble"><img src="facebook.svg" alt="fb" class = "logo-medias"></li>
-                <li class="bubble"><img src="youtube.svg" alt="yt" class = "logo-medias"></li>
-                <li class="bubble"><a href="https://www.instagram.com/agence_freelance/"><img src="instagram.svg" alt="inst" class = "logo-medias"></a></li>
-
-
-            </ul>
-        </div>
-
-<!-- Dans ton body, juste après ton code HTML -->
-
-
- 
-
-            <!-- TEST nouveau design offre -->
-    <h1 class="title-offre">Voici nos offres toutes prêtes !</h1>
-<section class="pricing-section">
-  <div class="pricing-container">
-    
-
-    <div class="box-esthetique"></div>
-
-    
-    <!-- Offre One Page -->
-    <div class="cards onepage-offer">
-  <h2>One Page</h2>
-  <p class="subtitle">Idéal pour lancer votre présence en ligne rapidement</p>
-  <ul class="features">
-    <li>✅ Jusqu’à 5 sections personnalisées</li>
-    <li>✅ Design responsive</li>
-    <li>✅ Formulaire de contact intégré</li>
-    <li>✅ SEO de base</li>
-    <li>✅ Mise en ligne rapide</li>
-  </ul>
-  <div class="price">À partir de <span>99,99 €</span></div>
-<a class="cta" href="offre-principal.html">Consultez l'offre</a>
-</div>
-
-
-    <!-- Offre Multi Page -->
-    <div class="cards multipage-offer">
-      <h2>Multi Pages</h2>
-      <p class="subtitle">Idéal pour lancer votre présence en ligne rapidement</p>
-      <ul class="features">
-        <li>✅ Jusqu’à 5 sections personnalisées</li>
-        <li>✅ Design responsive</li>
-        <li>✅ Formulaire de contact intégré</li>
-        <li>✅ SEO de base</li>
-        <li>✅ Mise en ligne rapide</li>
-      </ul>
-      <div class="price">À partir de <span>199,99 €</span></div>
-      <a class="cta" href="offre-principal.html">Consultez l'offre</a>
+        <!-- HERO SECTION -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-text">
+      <h1>Élevez votre présence digitale.</h1>
+      <p>Des sites sur mesure, au design raffiné, qui allient performance et élégance.</p>
+      <a href="#services" class="cta-btn">Découvrir nos offres</a>
     </div>
-
-    <!-- Offre Secondaire -->
-    <div class="cards secondary-offer">
-      <h2>Secondaire</h2>
-      <p class="subtitle">Plus de fonctionnalités pour vos besoins avancés</p>
-      <ul class="features">
-        <li>✅ Jusqu’à 5 pages incluses</li>
-        <li>✅ Design responsive & mobile-friendly</li>
-        <li>✅ Formulaire de contact + newsletter</li>
-        <li>✅ Portfolio / galerie intégrée</li>
-        <li>✅ Liens externes illimités</li>
-        <li>✅ SEO de base & chargement rapide</li>
-      </ul>
-      <div class="price">À partir de <span>390,99 €</span></div>
-      <a class="cta" href="offre-secondaire.html">Consultez l'offre</a>
+    <div class="hero-image">
+      <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085" alt="Hero Image" />
     </div>
+  </div>
+</section>
 
-    <!-- Offre Professionnelle -->
-    <div class="cards professional-offer">
-      <h2>Professionnelle</h2>
-      <p class="subtitle">Solution complète pour entreprises</p>
-      <ul class="features">
-        <li>✅ Multi-pages : 5 incluses + supplémentaires possibles</li>
-        <li>✅ Design responsive, rapide et optimisé</li>
-        <li>✅ Formulaire + newsletter intégrés</li>
-        <li>✅ Portfolio / galerie illimitée</li>
-        <li>✅ Footer complet + nom de domaine inclus</li>
-        <li>✅ SEO de base</li>
-        <li>✅ Site prêt à l’usage dès la livraison</li>
-      </ul>
-      <div class="price">À partir de <span>690,99 €</span></div>
-        <a class="cta" href="offre-pro.html">Consultez l'offre</a>
+<!-- SERVICES : SITES WEB -->
+<section id="services" class="services">
+  <h2>Création de sites web</h2>
+  <div class="service-row">
+    <div class="card onepage">
+      <span class="badge">Très demandé</span>
+      <h3>One Page</h3>
+      <p>Idéal pour présenter votre activité en une page élégante.</p>
+      <div class="price">499€</div>
     </div>
+    <div class="card multipage">
+      <span class="badge gold">Top vente</span>
+      <h3>Multi Pages</h3>
+      <p>Un site complet pour votre entreprise et vos services.</p>
+      <div class="price">899€</div>
+    </div>
+    <div class="card secondaire">
+      <h3>Secondaire</h3>
+      <p>Solution intermédiaire entre simplicité et flexibilité.</p>
+      <div class="price">699€</div>
+    </div>
+  </div>
+  <div class="card pro">
+    <span class="badge gold">Premium</span>
+    <h3>Professionnel</h3>
+    <p>Site sur mesure avec charte graphique et fonctionnalités avancées.</p>
+    <div class="price">Sur devis</div>
+  </div>
+</section>
 
+<!-- SERVICES : PACKAGING -->
+<section class="services">
+  <h2>Nos offres marketing & packaging</h2>
+  <div class="service-row">
+    <div class="card pack-starter">
+      <h3>Starter</h3>
+      <p>Commencez votre présence en ligne avec un pack essentiel.</p>
+      <div class="price">199€</div>
+    </div>
+    <div class="card pack-business">
+      <span class="badge">Populaire</span>
+      <h3>Business</h3>
+      <p>Boostez votre visibilité avec un accompagnement complet.</p>
+      <div class="price">349€</div>
+    </div>
+  </div>
+  <div class="card pack-pro">
+    <span class="badge gold">Exclusif</span>
+    <h3>Pro</h3>
+    <p>Solutions marketing avancées pour marques ambitieuses.</p>
+    <div class="price">Sur devis</div>
+  </div>
+</section>
+
+<!-- POURQUOI NOUS CHOISIR -->
+<section class="why-us">
+  <h2>Pourquoi nous choisir</h2>
+  <div class="why-container">
+    <div class="why-card">
+      <h3>Expertise</h3>
+      <p>Des années d’expérience dans le digital et le design.</p>
+    </div>
+    <div class="why-card">
+      <h3>Accompagnement</h3>
+      <p>Suivi personnalisé à chaque étape de votre projet.</p>
+    </div>
+    <div class="why-card">
+      <h3>Innovation</h3>
+      <p>Des solutions modernes adaptées à votre image.</p>
+    </div>
+  </div>
+</section>
+
+<!-- QUI SOMMES-NOUS -->
+<section class="about">
+  <div class="about-content">
+    <div class="about-text">
+      <h2>Qui sommes-nous ?</h2>
+      <p>Une équipe passionnée par le digital, le design et la performance. Nous concevons des expériences uniques pour chaque marque.</p>
+    </div>
+    <div class="about-img">
+      <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f" alt="Team" />
+    </div>
   </div>
 </section>
 
 
 
-        <!-- Les packagings -> -->
-        <div class="box-packaging">
-        <img  id="img_package" src="img test package.jpg" alt="photo fond package">
-            <h2 class="title-packaging">Nos offres adaptés à vos besoins</h3>
-
-            <div class="packaging-starter">
-                <h3 class="title-packaging-starter">Starter Pack</h3>
-                <div class="subtitle-bar3"></div>
-                <p class="txt-packaging"><span class="material-symbols-outlined">star</span> <span>Site vitrine One page</span><br>
-                <span class="material-symbols-outlined">star</span> <span>Création d'un logo personnalisé</span><br>
-                <span class="material-symbols-outlined">star</span> <span>Mises en place de vos réseaux sociaux</span><br>
-                <span class="material-symbols-outlined">star</span> <span>2 contenus offert</span><br></p>
-
-                <p class="description-starter-pack">Lancez votre présence digitale avec notre Starter Pack : un site vitrine One Page moderne et responsive, 
-                    accompagné d’un logo personnalisé, de vos comptes réseaux sociaux configurés, et de 2 posts prêts à publier, 
-                    pour démarquer immédiatement votre entreprise en ligne.</p>
-
-                    <div class="marketing-message">🚀 Offre à ne pas manquer</div>
-
-                <button class = "btn-packaging" onclick="window.location.href='starter-pack.html'">découvrir notre offre</button>
-                
-            </div>
-
-            <div class="packaging-business">
-                <h3 class="title-packaging-starter">Business Pack</h3>
-                <div class="subtitle-bar2"></div>
-                <p class="txt-packaging"><span class="material-symbols-outlined">star</span> <span>Site vitrine multi-pages avec formulaire de contact</span><br>
-                <span class="material-symbols-outlined">star</span> <span>Création d'un logo personnalisé</span><br>
-                <span class="material-symbols-outlined">star</span> <span>Mise en place réseaux sociaux + 2 posts de lancement</span><br>
-                <span class="material-symbols-outlined">star</span> <span>Gestion contenu réseaux sociaux 1 mois</span><br></p>
-
-                <p class="description-starter-pack">Boostez votre visibilité avec notre Business Pack : un site vitrine multi-pages complet avec formulaire de contact, 
-                    accompagné d’un logo personnalisé, de vos comptes réseaux sociaux configurés + 2 posts de lancement, et de 1 mois de 
-                    gestion de contenu pour dynamiser votre communication et attirer vos premiers clients.</p>
-
-                    <div class="marketing-message">💼 Boostez votre visibilité</div>
-
-                <button class="btn-packaging" onclick="window.location.href='package-business.html'">découvrir notre offre</button>
-            </div>
-
-            <div class="packaging-pro">
-                <h3 class="title-packaging-starter">Pro Pack</h3>
-                <div class="subtitle-bar"></div>
-                <p class="txt-packaging"><span class="material-symbols-outlined">star</span> <span>Site vitrine ou e-commerce avec paiement sécurisé</span><br>
-                <span class="material-symbols-outlined">star</span> <span>Création d'un logo personnalisé</span><br>
-                <span class="material-symbols-outlined">star</span> <span>Mise en place réseaux sociaux</span><br>
-                <span class="material-symbols-outlined">star</span> <span>Gestion contenu réseaux sociaux 2 mois</span><br></p>
-
-                <p class="description-starter-pack">Propulsez votre entreprise avec notre Pro Pack : un site vitrine ou e-commerce complet avec paiement sécurisé, 
-                    accompagné d’un logo personnalisé, de vos comptes réseaux sociaux configurés, et de 2 mois de gestion de contenu, 
-                    pour offrir à votre marque une présence en ligne professionnelle, dynamique et performante.</p>
-
-                    <div class="marketing-message">🌟 Passez au niveau supérieur</div>
-
-                <button class="btn-packaging" onclick="window.location.href='package-pro.html'">découvrir notre offre</button>
-            </div>
-        </div>
-
-        <!-- PAGE POURQUOI NOUS FAIRE CONFIANCE  -->
-
-        <div class="box-rapp-id">
-            <img id="img-rapp-id" src="image rappel id .jpg" alt="rappel ID image">
-            <div class="menu-rapp-id">
-                <span class="fleche">←</span>
-            </div>
-            <div class="ligne1"></div>
-            <h2 class="title-rapp-id">Rappel sur notre identité</h2>
-            <div class="ligne-under-title"></div>
-            <p class="txt-rapp-id">Nous sommes une micro-entreprise passionnée par le développement web, avec une mission claire :<br>
-                 rendre la création de sites internet professionnels accessible à toutes les petites structures. Contrairement <br>
-                 aux grandes agences aux tarifs souvent inabordables, nous avons choisi de nous dédier aux PME, <br>
-                 indépendants et start-up, afin de leur offrir des solutions de qualité à des prix justes et transparents.<br>
-                Notre priorité est de construire une véritable relation de confiance avec nos clients. Nous prenons le <br>
-                temps d’écouter leurs besoins, de comprendre leurs objectifs et de traduire leurs idées en un site moderne,<br>
-                 efficace et parfaitement adapté à leur activité. Chaque projet est conçu comme un accompagnement <br>
-                 personnalisé, où le dialogue est au cœur du processus.
-                En choisissant notre agence, vous n’obtenez pas <br>
-                seulement un site internet : vous bénéficiez d’un partenaire attentif, engagé et disponible, prêt à vous <br>
-                aider à poser les bases solides de votre présence en ligne et à donner à votre entreprise l’élan <br>
-                qu’elle mérite.</p>
-        </div>
-
-       
-        <div class="pk-nous-choisir">
-            <div class="menu-hidden">
-                <span class="arrow">➔</span>
-            </div>
-            <img id="img-pk-nous-choisir" src="img pourquoi nous choisir.jpg" alt="Image pourquoi nous chosir">
-            <div class="ligne2"></div>
-            <h2 class="title-pk-nous-choisir">Pourquoi nous chosir ?</h2>
-            <div class="ligne2-under-title"></div>
-            <p class="txt-pk-nous-choisir">Parce que nous croyons que chaque entreprise, quelle que soit sa taille, mérite une présence en ligne <br>
-                professionnelle, moderne et efficace. Trop souvent, les petites entreprises et les start-up hésitent à <br>
-                franchir le pas du digital par crainte de coûts élevés, de processus compliqués ou de délais interminables. <br>
-                Notre mission est justement de briser ces barrières.
-                En tant qu’agence de freelance spécialisée dans <br>
-                l’accompagnement des TPE, PME et jeunes entrepreneurs, nous vous proposons des solutions claires,<br>
-                 transparentes et surtout adaptées à vos besoins réels. Pas de devis interminables, pas de tarifs flous, <br>
-                 mais des formules accessibles qui vous permettent d’investir intelligemment dans votre visibilité. <br>
-                Nous mettons un point d’honneur à travailler main dans la main avec nos clients. Pour nous, créer un <br>
-                site internet ne se limite pas à livrer un produit fini : c’est avant tout comprendre votre vision, vos <br>
-                valeurs et vos objectifs. Chaque projet démarre par une écoute attentive et un échange approfondi afin <br>
-                de construire un site qui vous ressemble vraiment — un site qui reflète l’identité de votre marque et <br>
-                qui parle directement à vos clients.</p>
-        </div>
+<!-- PORTFOLIO SECTION -->
+<section class="portfolio">
+  <div class="portfolio-content">
+    <div class="portfolio-text">
+      <h2>Découvrez notre portfolio</h2>
+      <p>Explorez nos projets récents et voyez comment nous transformons les idées en expériences digitales élégantes et performantes.</p>
+      <a href="portfolio.html" class="portfolio-btn">Voir le portfolio</a>
+    </div>
+  </div>
+</section>
 
 
-        <!-- PAGE PORTFOLIO          PAGE PORTFOLIO.                PAGE PORTFOLIO -->
-        
-        <h1 class="title-portfolio">↓  Consultez notre portfolio  ↓</h1>
-
-        <main>
-  <ul class='slider'>
-    <li class='item' style="background-image: url('img\ porfolio\ 1.png')">
-      <div class='content'>
-        <h2 class='title'>progress.co</h2>
-        <p class='description'>Dans le cadre du Community management pour Progress.co, nous avons publié régulièrement 
-            le contenu fourni sur TikTok afin d’optimiser la visibilité du projet. Nous avons également produit des rapports 
-            hebdomadaires détaillés pour analyser les performances et ajuster la stratégie digitale.
-        </p>
-        <button>Read More</button>
-      </div>
-    </li>
-    <li class='item' style="background-image: url('img\ portfolio4.jpg')">
-      <div class='content'>
-        <h2 class='title'>moonhealingexperiences</h2>
-        <p class='description'>Dans le cadre du Community management pour Moon Healing Experiences, nous avons géré le 
-            compte Instagram en créant et publiant du contenu régulier pour promouvoir ses cours de yoga en ligne. Nous 
-            avons également développé un système de réservation en ligne via Calendly, facilitant la prise de rendez-vous pour ses clients.</p>
-        <button>Read More</button>
-      </div>
-    </li>
-   
-    </li>
-    <li class='item' style="background-image: url('img\ portfolio\ 5.jpg')">
-      <div class='content'>
-        <h2 class='title'>luflaix</h2>
-        <p class='description'>
-          Dans le cadre du Community management pour Luflaix, nous avons créé et publié des vidéos courtes et photos sur TikTok 
-          afin de promouvoir efficacement leur nouvelle montre. Nous avons mis en œuvre notre expertise en contenu digital pour maximiser 
-          l’engagement et la visibilité de la marque auprès de sa communauté.
-        </p>
-        
-        
-        <button>Read More</button>
-      </div>
-    </li>
-     
-  </ul>
-  <nav class='nav'>
-    <ion-icon class='btn prev' name="arrow-back-outline"></ion-icon>
-    <ion-icon class='btn next' name="arrow-forward-outline"></ion-icon>
-  </nav>
-</main>
 
 <section id="social-media" class="social-media-section">
 
@@ -562,7 +1429,200 @@ video.addEventListener("loadedmetadata", () => {
             <script src="server.js"></script>
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r152/three.min.js"></script>
-    <script src="liquidEther.js"></script>
+        
+        <script>
+/* ============================
+   NAV SHOW / HIDE + SCROLL STATE
+   ============================ */
+(function(){
+  const header = document.querySelector('.header-index');
+  const navWrapper = document.querySelector('.nav-wrapper');
+  let lastY = window.pageYOffset || 0;
+  let ticking = false;
+
+  function onScroll(){
+    const y = window.pageYOffset || 0;
+    // add class when passing a threshold so nav gets solid bg
+    if(y > 90){
+      header.classList.add('scrolled');
+    } else {
+      header.classList.remove('scrolled');
+    }
+
+    if(!ticking){
+      window.requestAnimationFrame(() => {
+        if(y > lastY + 8){ // scrolling down
+          header.classList.add('nav-hidden');
+        } else if (y < lastY - 8){ // scrolling up
+          header.classList.remove('nav-hidden');
+        }
+        lastY = y;
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  // run once
+  onScroll();
+})();
+
+/* ============================
+   SIDEBAR (burger) + overlay
+   ============================ */
+(function(){
+  const openBtn = document.getElementById('openBtn');
+  const sidebar = document.getElementById('Mysidebar');
+  const overlay = document.querySelector('.overlay');
+  const closeBtn = document.getElementById('Close-Btn');
+
+  function openSidebar(e){
+    if(e) e.preventDefault();
+    sidebar.classList.add('open');
+    overlay.classList.add('active');
+  }
+  function closeSidebar(e){
+    if(e) e && e.preventDefault();
+    sidebar.classList.remove('open');
+    overlay.classList.remove('active');
+  }
+  // expose closeSidebar globally because html overlay calls closeSidebar()
+  window.closeSidebar = closeSidebar;
+
+  if(openBtn) openBtn.addEventListener('click', openSidebar);
+  if(closeBtn) closeBtn.addEventListener('click', closeSidebar);
+  if(overlay) overlay.addEventListener('click', closeSidebar);
+})();
+
+/* ============================
+   GSAP HEADLINE + HERO CINEMATIC ENTRANCE
+   ============================ */
+(function(){
+  // guard
+  if(typeof gsap === 'undefined') return;
+
+  // Split hero headline into spans for a fancy stagger
+  const hero = document.querySelector('.container');
+  if(!hero) return;
+
+  const h1 = hero.querySelector('h1');
+  const text = h1 ? h1.innerText.trim() : '';
+  if(h1){
+    // wrap each word in span
+    const words = text.split(' ').map(w => `<span class="word" style="display:inline-block; white-space:nowrap;">${w}</span>`).join(' ');
+    h1.innerHTML = words;
+  }
+
+  // simple parallax for hero on mouse move (subtle)
+  const parallaxEls = [hero, ...document.querySelectorAll('.btns, .container-contacts')];
+  window.addEventListener('mousemove', (e)=>{
+    const w = window.innerWidth, h = window.innerHeight;
+    const nx = (e.clientX - w/2) / (w/2);
+    const ny = (e.clientY - h/2) / (h/2);
+    parallaxEls.forEach((el, i)=>{
+      if(!el) return;
+      const depth = 6 + i;
+      el.style.transform = `translate3d(${nx*depth}px, ${ny*depth}px, 0)`;
+      el.style.transition = 'transform 600ms cubic-bezier(.22,.9,.32,1)';
+    });
+  });
+
+  // Timeline for entrance
+  const tl = gsap.timeline({defaults:{duration:0.9, ease:"power3.out"}});
+  tl.from('.header-index', {y:-30, opacity:0, duration:0.8}, 0);
+  tl.from('.container .word', {y:36, opacity:0, stagger:0.06, scale:0.98, transformOrigin:'left center'}, 0.12);
+  tl.from('.btns .btn-first', {y:18, opacity:0, stagger:0.08}, 0.6);
+  tl.from('.container-contacts .bubble', {y:18, opacity:0, stagger:0.06}, 0.7);
+
+  // subtle looped shimmer on gold items (not aggressive)
+  gsap.to('.matte-gold-shimmer', {duration:3.8, repeat:-1, ease:'sine.inOut', yoyo:true, opacity:0.12});
+})();
+
+/* ============================
+   INTERSECTION OBSERVER -> GSAP reveal for sections
+   ============================ */
+(function(){
+  if(typeof gsap === 'undefined') return;
+  const revealEls = document.querySelectorAll('.cards, .packaging-starter, .box-rapp-id, .pk-nous-choisir, .pricing-section > .pricing-container > .cards');
+  const opts = {threshold: 0.12};
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        const el = entry.target;
+        gsap.fromTo(el, {y:28, opacity:0, scale:0.995}, {y:0, opacity:1, scale:1, duration:0.9, ease:'power3.out', overwrite:true});
+        io.unobserve(el);
+      }
+    });
+  }, opts);
+  revealEls.forEach(el => {
+    el.style.opacity = 0;
+    io.observe(el);
+  });
+
+  // small stagger for pricing cards grid
+  const pricingCards = document.querySelectorAll('.pricing-container .cards');
+  pricingCards.forEach((c, idx) => {
+    c.style.opacity = 0;
+    setTimeout(()=> {
+      gsap.to(c, {opacity:1, y:0, duration:0.9, delay: idx*0.08, ease:'power3.out'});
+    }, 380 + idx*60);
+  });
+})();
+
+/* ============================
+   SMOOTH ANCHOR SCROLL (optional)
+   ============================ */
+(function(){
+  document.addEventListener('click', function(e){
+    const t = e.target.closest('a[href^="#"]');
+    if(!t) return;
+    const id = t.getAttribute('href');
+    if(id === '#' || id === '') return;
+    const target = document.querySelector(id);
+    if(!target) return;
+    e.preventDefault();
+    window.scrollTo({top: target.getBoundingClientRect().top + window.pageYOffset - 80, behavior:'smooth'});
+  });
+})();
+
+/* ============================
+   Accessibility small helpers
+   ============================ */
+(function(){
+  // make submenu keyboard accessible
+  const items = document.querySelectorAll('.nav-menu-item');
+  items.forEach(it => {
+    it.setAttribute('tabindex', 0);
+    it.addEventListener('keyup', (e) => {
+      if(e.key === 'Enter' || e.key === ' ') it.classList.toggle('open');
+    });
+  });
+})();
+
+
+
+/* ==============================
+    PORTFOLIO JAVA
+    ================================ */
+
+    gsap.utils.toArray(".portfolio-content").forEach((el) => {
+  gsap.from(el, {
+    scrollTrigger: el,
+    opacity: 0,
+    y: 50,
+    duration: 1.2,
+    ease: "power3.out",
+  });
+});
+
+
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+
+
 
     </body>
 
